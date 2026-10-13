@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stackly | Studio Booking & Client Portal</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --bg-card: rgba(10, 13, 20, 0.95);
+            --border-cyan: rgba(0, 240, 255, 0.3);
+            --cyan-glow: #00f0ff;
+            --blue-accent: #0066ff;
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --danger-red: #ff4d4d;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            overflow-x: hidden;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 16px;
+            position: relative;
+        }
+
+        /* Ambient Cyan Background Lighting */
+        .portal-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(140px);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .glow-top-left {
+            top: -100px;
+            left: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(0, 102, 255, 0.05) 70%, transparent 100%);
+        }
+
+        /* Floating Studio Navigation Button */
+        .home-floating-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(10, 13, 20, 0.9);
+            border: 1px solid var(--border-cyan);
+            color: var(--cyan-glow);
+            padding: 9px 18px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .home-floating-btn:hover {
+            border-color: var(--cyan-glow);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Animated Split Portal Container */
+        .portal-animated-container {
+            position: relative;
+            width: 100%;
+            max-width: 1020px;
+            height: 700px;
+            max-height: 90vh;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1.5px solid var(--border-cyan);
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 45px rgba(0, 240, 255, 0.12);
+            z-index: 10;
+        }
+
+        /* Form Panels with Full Scroll Capability */
+        .form-panel {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            padding: 40px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 2;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-cyan) transparent;
+            background-color: black;
+        }
+
+        .form-panel::-webkit-scrollbar {
+            width: 4px;
+        }
+        .form-panel::-webkit-scrollbar-thumb {
+            background: var(--border-cyan);
+            border-radius: 10px;
+        }
+
+        .sign-in-panel {
+            left: 0;
+            opacity: 1;
+        }
+
+        .sign-up-panel {
+            left: 0;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .portal-animated-container.active-mode .sign-in-panel {
+            transform: translateX(100%);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .portal-animated-container.active-mode .sign-up-panel {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+        }
+
+        /* Top Direct Form Logo */
+        .form-top-logo {
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .form-top-logo img {
+            max-height: 38px;
+            max-width: 160px;
+            object-fit: contain;
+           
+        }
+
+        /* Sliding Banner Overlay */
+        .overlay-slider-stage {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 10;
+            border-left: 1px solid var(--border-cyan);
+        }
+
+        .portal-animated-container.active-mode .overlay-slider-stage {
+            transform: translateX(-100%);
+            border-left: none;
+            border-right: 1px solid var(--border-cyan);
+        }
+
+        .overlay-banner-bg {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10, 13, 20, 0.5) 0%, rgba(10, 13, 20, 0.95) 100%),
+                        url('./1\ \(5\)_11zon.webp') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 45px;
+            text-align: center;
+        }
+
+        .overlay-content-center h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .overlay-content-center h2 span {
+            color: var(--cyan-glow);
+        }
+
+        .overlay-content-center p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-slide-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            border: 1.5px solid var(--cyan-glow);
+            color: var(--cyan-glow);
+            padding: 13px 32px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+        }
+
+        .btn-slide-toggle:hover {
+            background: var(--cyan-glow);
+            color: #000000;
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* Form Headings & Labels */
+        .form-title-group {
+            margin-bottom: 20px;
+        }
+
+        .form-title-group h2 {
+            font-size: 1.7rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+        }
+
+        .form-title-group p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cyber-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cyber-input-wrapper i.field-icon {
+            position: absolute;
+            left: 14px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        .cyber-input-wrapper input, 
+        .cyber-input-wrapper select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-cyan);
+            border-radius: 14px;
+            padding: 13px 42px 13px 40px;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-input-wrapper select {
+            cursor: pointer;
+            appearance: none;
+        }
+
+        .cyber-input-wrapper select option {
+            background: #0a0d14;
+            color: #ffffff;
+        }
+
+        .cyber-input-wrapper input:focus, 
+        .cyber-input-wrapper select:focus {
+            border-color: var(--cyan-glow);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.25);
+        }
+
+        /* Eye Toggle Button */
+        .toggle-pass {
+            position: absolute;
+            right: 14px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            z-index: 5;
+        }
+
+        .toggle-pass:hover {
+            color: var(--cyan-glow);
+        }
+
+        .form-utilities {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .remember-me input {
+            accent-color: var(--cyan-glow);
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: var(--cyan-glow);
+            text-decoration: none;
+            font-weight: 700;
+            transition: opacity 0.3s ease;
+        }
+
+        .forgot-link:hover {
+            opacity: 0.8;
+        }
+
+        .error-feedback {
+            color: var(--danger-red);
+            font-size: 0.75rem;
+            font-weight: 700;
+            min-height: 14px;
+        }
+
+        .cyber-submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--cyan-glow) 0%, var(--blue-accent) 100%);
+            color: #000000;
+            padding: 14px;
+            border-radius: 14px;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .cyber-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 240, 255, 0.55);
+        }
+
+        .social-divider {
+            text-align: center;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            font-weight: 800;
+            margin: 14px 0 8px;
+        }
+
+        .social-divider::before, .social-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 25%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .social-divider::before { left: 0; }
+        .social-divider::after { right: 0; }
+
+        .social-login-icons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-cyan);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            border-color: var(--cyan-glow);
+            color: var(--cyan-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+
+        /* Mobile Screen Breakdown */
+        @media (max-width: 850px) {
+            .portal-animated-container {
+                max-width: 500px;
+                height: auto;
+                max-height: none;
+                border-radius: 24px;
+            }
+
+            .overlay-slider-stage {
+                display: none;
+            }
+
+            .form-panel {
+                position: relative;
+                width: 100%;
+                padding: 32px 24px;
+                display: none;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+
+            .form-panel.mobile-active {
+                display: flex;
+            }
+
+            .mobile-switch-text {
+                text-align: center;
+                font-size: 0.8rem;
+                color: var(--text-muted);
+                margin-top: 16px;
+            }
+
+            .mobile-switch-text span {
+                color: var(--cyan-glow);
+                font-weight: 800;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Go Home Button -->
+    <a href="index.html" class="home-floating-btn">
+        <i class="fa-solid fa-house"></i> Return to Studio
+    </a>
+
+    <!-- Ambient Cyan Background Glow -->
+    <div class="portal-glow glow-top-left"></div>
+
+    <!-- Master Animated Split Container -->
+    <div class="portal-animated-container" id="portalContainer">
+        
+        <!-- ==========================================
+             PANEL 1: SIGN IN FORM
+             ========================================== -->
+        <div class="form-panel sign-in-panel mobile-active" id="signInPanel">
+            <!-- Direct Top Logo for Sign In -->
+            <div class="form-top-logo">
+                <a href="index.html">
+                    <img src="./logo.webp" alt="Stackly Studio Logo">
+                </a>
+            </div>
+
+            <div class="form-title-group">
+                <h2>Studio Client Sign In</h2>
+                <p>Access your car detailing logs, coating warranty & bookings.</p>
+            </div>
+
+            <form id="loginForm" novalidate>
+                <label>Select Portal Tier</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-user-shield field-icon"></i>
+                    <select id="loginRole" required>
+                        <option value="" disabled selected>Select your portal role</option>
+                        <option value="admin">Servicer Manager</option>
+                        <option value="client">VIP Car Customer </option>
+                    </select>
+                </div>
+
+                <label>Email Address</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-envelope field-icon"></i>
+                    <input type="email" id="loginEmail" placeholder="owner@gmail.com" pattern="[a-zA-Z0-9._%+-]+@gmail\.com$" required>
+                </div>
+
+                <label>Password</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-lock field-icon"></i>
+                    <input type="password" id="loginPassword" class="password-field" placeholder="Enter password (8+ chars, A-Z, a-z, 0-9, symbol)" required> 
+                    <i class="fa-solid fa-eye toggle-pass"></i>
+                </div>
+
+                <div class="form-utilities">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMeCheckbox" required> Remember Me
+                    </label>
+                    <a href="404.html" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <div class="error-feedback" id="loginError"></div>
+
+                <button type="submit" class="cyber-submit-btn">
+                    Authenticate <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <div class="social-divider">or connect with</div>
+            <div class="social-login-icons">
+                <a href="404.html" class="social-btn"><i class="fa-brands fa-apple"></i></a>
+                <a href="404.html" class="social-btn"><i class="fa-brands fa-google"></i></a>
+                <a href="404.html" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+
+            <!-- Mobile Only Switcher -->
+            <div class="mobile-switch-text" style="display: none;" id="mobileToSignUp">
+                Need a studio account? <span onclick="toggleMode(true)">Register Here</span>
+            </div>
+        </div>
+
+
+          <!-- ==========================================
+             PANEL 2: SIGN UP FORM
+             ========================================== -->
+        <div class="form-panel sign-up-panel" id="signUpPanel">
+            <!-- Direct Top Logo for Register -->
+            <div class="form-top-logo">
+                <a href="index.html">
+                    <img src="./logo.webp" alt="Stackly Studio Logo">
+                </a>
+            </div>
+
+            <div class="form-title-group">
+                <h2>Register Vehicle Profile</h2>
+                <p>Set up an account to manage your annual car wash maintenance.</p>
+            </div>
+
+            <form id="signupForm" novalidate>
+                <label>Full Car Owner Name</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-user field-icon"></i>
+                    <input type="text" id="signupFirstName" placeholder="Owner Name" pattern="[A-Za-z\s]+" required>
+                </div>
+
+                <label>Select Account Tier</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-briefcase field-icon"></i>
+                    <select id="signupRole" required>
+                        <option value="" disabled selected>Select account type</option>
+                        <option value="admin">Servicer Manager </option>
+                        <option value="client">VIP Car Customer</option>
+                    </select>
+                </div>
+
+                <label>Email Address</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-envelope field-icon"></i>
+                    <input type="email" id="signupEmail" placeholder="owner@gmail.com" pattern="[a-zA-Z0-9._%+-]+@gmail\.com$" required>
+                </div>
+
+                <label>Password</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-key field-icon"></i>
+                    <input type="password" id="signupPassword" class="password-field" placeholder="Min 8 chars, 1 upper, 1 lower, 1 num, 1 symbol" required> 
+                    <i class="fa-solid fa-eye toggle-pass"></i>
+                </div>
+
+                <label>Confirm Password</label>
+                <div class="cyber-input-wrapper">
+                    <i class="fa-solid fa-key field-icon"></i>
+                    <input type="password" id="signupConfirmPassword" class="password-field" placeholder="Confirm secure password" required> 
+                    <i class="fa-solid fa-eye toggle-pass"></i>
+                </div>
+
+                <div class="error-feedback" id="signupError"></div>
+
+                <button type="submit" class="cyber-submit-btn">
+                    Create Portal Account <i class="fa-solid fa-user-plus"></i>
+                </button>
+            </form>
+
+            <!-- Mobile Only Switcher -->
+            <div class="mobile-switch-text" style="display: none;" id="mobileToSignIn">
+                Already registered? <span onclick="toggleMode(false)">Sign In</span>
+            </div>
+        </div>
+
+
+        <!-- ==========================================
+             PANEL 3: SLIDING SHOWCASE OVERLAY BANNER
+             ========================================== -->
+        <div class="overlay-slider-stage">
+            <div class="overlay-banner-bg">
+                
+                <div class="overlay-content-center">
+                    <h2 id="bannerTitle">New to Our <span>Studio?</span></h2>
+                    <p id="bannerDesc">Register your vehicle today to track your ceramic coating maintenance, hydrophobic health, and priority wash slots.</p>
+                    <button class="btn-slide-toggle" id="slideToggleBtn" onclick="toggleMode()">Register Account</button>
+                </div>
+
+                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                   
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Interactive Sliding & Form Validation Script -->
+    <script>
+        const container = document.getElementById('portalContainer');
+        const slideBtn = document.getElementById('slideToggleBtn');
+        const bannerTitle = document.getElementById('bannerTitle');
+        const bannerDesc = document.getElementById('bannerDesc');
+        const signInPanel = document.getElementById('signInPanel');
+        const signUpPanel = document.getElementById('signUpPanel');
+
+        let isSignUpActive = false;
+
+        function toggleMode(forceSignUp) {
+            if (typeof forceSignUp === 'boolean') {
+                isSignUpActive = forceSignUp;
+            } else {
+                isSignUpActive = !isSignUpActive;
+            }
+
+            if (isSignUpActive) {
+                container.classList.add('active-mode');
+                bannerTitle.innerHTML = 'Already Have an <span>Account?</span>';
+                bannerDesc.innerText = 'Sign in to access your saved vehicle profiles, active service quotes, and ceramic coating logs.';
+                slideBtn.innerText = 'Sign In';
+
+                // Mobile View Handling
+                signInPanel.classList.remove('mobile-active');
+                signUpPanel.classList.add('mobile-active');
+            } else {
+                container.classList.remove('active-mode');
+                bannerTitle.innerHTML = 'New to Our <span>Studio?</span>';
+                bannerDesc.innerText = 'Register your vehicle today to track your ceramic coating maintenance, hydrophobic health, and priority wash slots.';
+                slideBtn.innerText = 'Register Account';
+
+                // Mobile View Handling
+                signUpPanel.classList.remove('mobile-active');
+                signInPanel.classList.add('mobile-active');
+            }
+        }
+
+        // Toggle Eye Button Password Field (Show / Hide Password)
+        document.querySelectorAll('.toggle-pass').forEach(toggleIcon => {
+            toggleIcon.addEventListener('click', function() {
+                const inputElement = this.parentElement.querySelector('.password-field');
+                if (inputElement.type === 'password') {
+                    inputElement.type = 'text';
+                    this.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    inputElement.type = 'password';
+                    this.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        });
+
+        // Helper Password Regex Evaluator
+        function isStrictPassword(pass) {
+            const hasMinLength = pass.length >= 8;
+            const hasUpper = /[A-Z]/.test(pass);
+            const hasLower = /[a-z]/.test(pass);
+            const hasNum = /[0-9]/.test(pass);
+            const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(pass);
+            return hasMinLength && hasUpper && hasLower && hasNum && hasSpecial;
+        }
+
+        // Check window width for mobile switch text visibility
+        function checkMobileScreen() {
+            const mobileToSignUp = document.getElementById('mobileToSignUp');
+            const mobileToSignIn = document.getElementById('mobileToSignIn');
+            if (window.innerWidth <= 850) {
+                mobileToSignUp.style.display = 'block';
+                mobileToSignIn.style.display = 'block';
+            } else {
+                mobileToSignUp.style.display = 'none';
+                mobileToSignIn.style.display = 'none';
+            }
+        }
+        window.addEventListener('resize', checkMobileScreen);
+        checkMobileScreen();
+
+        // Login Form Validation
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.innerText = ""; 
+            const userEmail = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const selectedRole = document.getElementById('loginRole').value;
+            const rememberCheckbox = document.getElementById('rememberMeCheckbox');
+
+            if (!rememberCheckbox.checked) {
+                errorDiv.innerText = "Validation Error: You must check 'Remember Me' to authenticate.";
+                return;
+            }
+
+            if (!userEmail.endsWith('@gmail.com')) {
+                errorDiv.innerText = "Validation Error: Authentication restricted to valid @gmail.com accounts.";
+                return;
+            }
+
+            if (!isStrictPassword(password)) {
+                errorDiv.innerText = "Error: Password requires 8+ chars, 1 uppercase, 1 lowercase, 1 number & 1 symbol.";
+                return;
+            }
+
+            localStorage.setItem('currentUserEmail', userEmail);
+            window.location.href = selectedRole === 'admin' ? './admin.html' : 'client.html';
+        });
+
+        // Signup Form Validation
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const errorDiv = document.getElementById('signupError');
+            errorDiv.innerText = ""; 
+            const fullName = document.getElementById('signupFirstName').value;
+            const userEmail = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                errorDiv.innerText = "Validation Error: Passwords do not match.";
+                return;
+            }
+
+            if (!isStrictPassword(password)) {
+                errorDiv.innerText = "Error: Password requires 8+ chars, 1 uppercase, 1 lowercase, 1 number & 1 symbol.";
+                return;
+            }
+
+            if (!userEmail.endsWith('@gmail.com')) {
+                errorDiv.innerText = "Access Denied: Registrations must map to verified @gmail.com accounts.";
+                return;
+            }
+            localStorage.setItem('currentUser', fullName);
+            localStorage.setItem('currentUserEmail', userEmail);
+            alert("Account successfully created! Switching to Sign In.");
+            toggleMode(false);
+            document.getElementById('signupForm').reset();
+        });
+    </script>
+</body>
+</html>

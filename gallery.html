@@ -1,0 +1,3756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stackly | Premium Car Wash & Detailing Services</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <!-- Left: Logo -->
+            <a href="./index.html" class="logo">
+                <img src="./logo.webp" alt="Stackly Logo" class="custom-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
+                <div class="logo-icon" id="fallback-logo" style="display:none;">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                
+            </a>
+
+            <!-- Center/Mobile Drawer Navigation Menu -->
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="./index.html" class="nav-link ">Home</a></li>
+                    <li><a href="./about us.html" class="nav-link">About Us</a></li>
+                    <li><a href="./our services.html" class="nav-link">Our Services</a></li>
+                    <li><a href="./washpackages.html" class="nav-link">Wash Packages</a></li>
+                    <li><a href="./gallery.html" class="nav-link active">Gallery</a></li>
+                    <li><a href="./contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="mobile-login-wrapper">
+                    <a href="login.html" class="btn btn-login-cyan btn-block"><i class="fa-regular fa-user"></i> Login to Dashboard</a>
+                </div>
+            </nav>
+
+            <!-- Right: Cyan Login Button & Hamburger Toggle -->
+            <div class="nav-right">
+                <a href="login.html" class="btn-login-cyan desktop-only">
+                    <i class="fa-regular fa-user"></i> Login
+                </a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+<!-- ==========================================
+     SECTION 1: FULL SCREEN HERO GALLERY (INTERACTIVE 4K SLIDER)
+     ========================================== -->
+<style>
+    .hero-gallery-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* Full-Bleed Ultra HD Background Slider Stage */
+    .hero-bg-stage {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .hero-bg-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: scale(1.05);
+    }
+
+    .hero-bg-slide.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .hero-bg-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.75) contrast(1.15); /* Balanced for maximum image clarity */
+    }
+
+    /* Light Ambient Gradient Overlay */
+    .hero-gradient-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.85) 90%),
+                    linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, transparent 40%, rgba(0, 0, 0, 0.85) 100%);
+        z-index: 2;
+    }
+
+    .hero-gallery-container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Left Text Content */
+    .hero-text-content {
+        max-width: 580px;
+    }
+
+    .hero-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 15px;
+        display: inline-block;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    .hero-title {
+        font-size: 3.8rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.1;
+        letter-spacing: -1.5px;
+        margin-bottom: 20px;
+    }
+
+    .hero-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+        color: #cbd5e1;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 35px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Interactive Process Button */
+    .play-process-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        padding: 12px 28px 12px 14px;
+        border-radius: 50px;
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+    }
+
+    .play-icon-circle {
+        width: 42px;
+        height: 42px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000000;
+        font-size: 0.9rem;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.6);
+        transition: transform 0.3s ease;
+    }
+
+    .play-process-btn:hover {
+        border-color: #00f0ff;
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.3);
+    }
+
+    .play-process-btn:hover .play-icon-circle {
+        transform: scale(1.1);
+    }
+
+    /* Right Side Interactive Arrow Navigation (Arromaxes) */
+    .hero-slide-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 800;
+        font-size: 0.9rem;
+        background: rgba(10, 13, 20, 0.6);
+        backdrop-filter: blur(12px);
+        padding: 20px 14px;
+        border-radius: 30px;
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    }
+
+    .nav-arrow {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        user-select: none;
+    }
+
+    .nav-arrow:hover {
+        background: #00f0ff;
+        color: #000000;
+        box-shadow: 0 0 18px rgba(0, 240, 255, 0.8);
+        transform: scale(1.1);
+    }
+
+    .active-slide-num {
+        font-size: 1.8rem;
+        color: #00f0ff;
+        text-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+        font-weight: 900;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 968px) {
+        .hero-gallery-container {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 40px;
+        }
+        .hero-title {
+            font-size: 2.8rem;
+        }
+        .hero-slide-nav {
+            flex-direction: row;
+            width: auto;
+            align-self: flex-end;
+        }
+    }
+</style>
+
+<section class="hero-gallery-section" id="hero-gallery">
+    
+    <!-- Ultra HD Background Slider Stage (5 HD Images) -->
+    <div class="hero-bg-stage" id="heroBgStage">
+        <!-- Slide 1 -->
+        <div class="hero-bg-slide active">
+            <img src="./1 (20)_6_11zon.webp" alt="Supercar Liquid Ceramic Gloss">
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-bg-slide">
+            <img src="./1 (31)_17_11zon.webp" alt="High Pressure Foam Wash Detail">
+        </div>
+        <!-- Slide 3 -->
+        <div class="hero-bg-slide">
+            <img src="./1 (22)_8_11zon.webp" alt="Rotary Polish & Paint Correction">
+        </div>
+        <!-- Slide 4 -->
+        <div class="hero-bg-slide">
+            <img src="./1 (37)_23_11zon.webp" alt="Interior Steam Detailing">
+        </div>
+        <!-- Slide 5 -->
+        <div class="hero-bg-slide">
+            <img src="./1 (42)_28_11zon.webp" alt="Hydrophobic Water Beading Finish">
+        </div>
+    </div>
+
+    <!-- Gradient Overlay for Clarity and Readability -->
+    <div class="hero-gradient-overlay"></div>
+
+    <!-- Main Hero Content Container -->
+    <div class="hero-gallery-container">
+        <!-- Left Text Box -->
+      <br>
+      <br>  <div class="hero-text-content">
+            <span class="hero-sub-tag">Our Gallery</span>
+            <h1 class="hero-title">Clean Cars<br><span>Happy Vibes</span></h1>
+            <p class="hero-description">A closer look at the shine, care and perfection we bring to every ride.</p>
+            
+            <a href="./404.html" class="play-process-btn">
+                <span class="play-icon-circle"><i class="fa-solid fa-play"></i></span>
+                <span>Watch Our Process</span>
+            </a>
+        </div>
+
+        <!-- Right Side Interactive Arrow Navigation (Arromaxes) -->
+        <div class="hero-slide-nav">
+            <div class="nav-arrow" id="prevSlideBtn" title="Previous Image">
+                <i class="fa-solid fa-arrow-up"></i>
+            </div>
+            <span class="active-slide-num" id="currentSlideNum">01</span>
+            <span>/ 05</span>
+            <div class="nav-arrow" id="nextSlideBtn" title="Next Image">
+                <i class="fa-solid fa-arrow-down"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Interactive Image Navigation Script -->
+<script>
+    (function initHeroGallerySlider() {
+        const slides = document.querySelectorAll('.hero-bg-slide');
+        const prevBtn = document.getElementById('prevSlideBtn');
+        const nextBtn = document.getElementById('nextSlideBtn');
+        const slideNumDisplay = document.getElementById('currentSlideNum');
+        
+        if (!slides.length || !prevBtn || !nextBtn) return;
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        function updateSlide(index) {
+            slides.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+
+            // Format counter to 01, 02, etc.
+            const formattedIndex = (index + 1).toString().padStart(2, '0');
+            if (slideNumDisplay) slideNumDisplay.textContent = formattedIndex;
+        }
+
+        // Next Slide (Down Arrow)
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlide(currentIndex);
+        });
+
+        // Previous Slide (Up Arrow)
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlide(currentIndex);
+        });
+    })();
+</script>
+
+<!-- ==========================================
+     SECTION 2: MASONRY IMAGE GRID & EDITORIAL
+     ========================================== -->
+<style>
+    .masonry-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .masonry-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Asymmetric Masonry Layout Grid */
+    .masonry-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 150px;
+        gap: 16px;
+    }
+
+    .masonry-item {
+        position: relative;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        background: rgba(10, 13, 20, 0.9);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .masonry-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.8) contrast(1.15);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+
+    .masonry-item:hover {
+        transform: translateY(-6px);
+        border-color: #00f0ff;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.25);
+        z-index: 3;
+    }
+
+    .masonry-item:hover img {
+        transform: scale(1.08);
+        filter: brightness(0.95) contrast(1.2);
+    }
+
+    /* Spanning Rules for Asymmetry */
+    .item-tall { grid-row: span 2; }
+    .item-wide { grid-column: span 2; }
+    .item-large { grid-column: span 2; grid-row: span 2; }
+
+    /* Right Side Editorial Content */
+    .masonry-text-content {
+        padding-left: 20px;
+    }
+
+    .masonry-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+
+    .masonry-title {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .masonry-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .masonry-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 35px;
+    }
+
+    .view-more-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 0.95rem;
+        font-weight: 800;
+        padding: 14px 32px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .view-more-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Responsive Grid Adjustments */
+    @media (max-width: 1024px) {
+        .masonry-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .masonry-text-content {
+            padding-left: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .masonry-grid {
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 130px;
+        }
+    }
+    /* ==========================================
+   MASONRY SECTION: MOBILE RESPONSIVE FIXES
+   ========================================== */
+
+@media (max-width: 968px) {
+    /* Prevent Section Overflow & Adjust Padding */
+    .masonry-section {
+        padding: 60px 0 !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+
+    .masonry-container {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        padding: 0 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Editorial Text Content Mobile Alignment */
+    .masonry-text-content {
+        padding-left: 0 !important;
+        text-align: left !important;
+    }
+
+    .masonry-sub-tag {
+        font-size: 0.8rem !important;
+        letter-spacing: 2px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .masonry-title {
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 16px !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    .masonry-desc {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* Mobile Button Styling */
+    .view-more-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 14px 24px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Mobile Screens (< 640px) - Grid Reset */
+@media (max-width: 640px) {
+    .masonry-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-auto-rows: 120px !important;
+        gap: 10px !important;
+        width: 100% !important;
+    }
+
+    /* Reset Spanning Rules for Mobile Balance */
+    .item-tall {
+        grid-row: span 2 !important;
+    }
+
+    .item-wide {
+        grid-column: span 2 !important;
+    }
+
+    .item-large {
+        grid-column: span 2 !important;
+        grid-row: span 2 !important;
+    }
+
+    .masonry-item {
+        border-radius: 12px !important;
+    }
+}
+
+/* Extra Small Phones (< 480px) */
+@media (max-width: 480px) {
+    .masonry-section {
+        padding: 45px 0 !important;
+    }
+
+    .masonry-title {
+        font-size: 1.85rem !important;
+    }
+
+    .masonry-grid {
+        grid-auto-rows: 105px !important;
+        gap: 8px !important;
+    }
+}
+</style>
+
+<section class="masonry-section" id="masonry-gallery">
+    <div class="masonry-container">
+        
+        <!-- Left Side Masonry Grid -->
+        <div class="masonry-grid">
+            <!-- Item 1: Wheel Care -->
+            <div class="masonry-item item-tall">
+                <img src="./1 (1)_11zon.webp" alt="Alloy Wheel Care">
+            </div>
+
+            <!-- Item 2: Foam Wash (Large Focus) -->
+            <div class="masonry-item item-wide">
+                <img src="./1 (2)_11zon.webp" alt="Snow Foam Wash">
+            </div>
+
+            <!-- Item 3: Interior Leather Detail -->
+            <div class="masonry-item">
+                <img src="./1 (3)_11zon.webp" alt="Interior Detail">
+            </div>
+
+            <!-- Item 4: Headlight Restoration -->
+            <div class="masonry-item">
+                <img src="./1 (4)_11zon.webp" alt="Optical Headlight Clarity">
+            </div>
+
+            <!-- Item 5: Engine Bay -->
+            <div class="masonry-item item-wide">
+                <img src="./1 (5)_11zon.webp" alt="Engine Vapor Clean">
+            </div>
+
+            <!-- Item 6: Paint Correction Rotary Polish -->
+            <div class="masonry-item">
+                <img src="./1 (6)_11zon.webp" alt="Rotary Polish">
+            </div>
+        </div>
+
+        <!-- Right Side Editorial Text -->
+        <div class="masonry-text-content">
+            <span class="masonry-sub-tag">Visual Perfection</span>
+            <h2 class="masonry-title">Every Detail<br>Tells a <span>Story</span></h2>
+            <p class="masonry-desc">From wheels to windows, we treat every inch with care. Experience cleanroom-grade precision and liquid-mirror gloss finishes tailored for luxury automobiles.</p>
+            
+            <a href="./404.html" class="view-more-btn">
+                <span>View More</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ==========================================
+     SECTION 3: BEFORE & AFTER INTERACTIVE SLIDER
+     ========================================== -->
+<style>
+    .ba-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .ba-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Before & After Comparison Stage */
+    .ba-stage-wrapper {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.15);
+        user-select: none;
+        cursor: ew-resize;
+    }
+
+    /* Layer 1: "After" Image (Clean Finish) */
+    .ba-image-after {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .ba-image-after img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.95) contrast(1.15);
+    }
+
+    /* Layer 2: "Before" Image (Top Clipped Dirty Layer) */
+    .ba-image-before {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        overflow: hidden;
+        width: 50%; /* Default 50% split */
+        border-right: 2px solid #00f0ff;
+    }
+
+    .ba-image-before img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.65) contrast(0.9) grayscale(0.2);
+    }
+
+    /* Badge Pills */
+    .ba-badge {
+        position: absolute;
+        top: 20px;
+        z-index: 4;
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 240, 255, 0.35);
+        color: #ffffff;
+        font-size: 0.78rem;
+        font-weight: 800;
+        padding: 6px 16px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+    }
+
+    .ba-badge.before-badge { left: 20px; color: #ff4d4d; border-color: rgba(255, 77, 77, 0.4); }
+    .ba-badge.after-badge { right: 20px; color: #00f0ff; border-color: rgba(0, 240, 255, 0.4); }
+
+    /* Interactive Handle Divider Bar */
+    .ba-handle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        background: #00f0ff;
+        z-index: 5;
+        transform: translateX(-50%);
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);
+        pointer-events: none;
+    }
+
+    .ba-handle-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 44px;
+        height: 44px;
+        background: rgba(10, 13, 20, 0.9);
+        border: 2px solid #00f0ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #00f0ff;
+        font-size: 0.9rem;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Right Content Box */
+    .ba-text-content {
+        padding-left: 20px;
+    }
+
+    .ba-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+
+    .ba-title {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .ba-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .ba-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 35px;
+    }
+
+    /* Working Interactive Thumbnails */
+    .ba-thumbnails-row {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 30px;
+    }
+
+    .ba-thumb {
+        width: 80px;
+        height: 60px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+    }
+
+    .ba-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .ba-thumb.active, .ba-thumb:hover {
+        opacity: 1;
+        border-color: #00f0ff;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    /* Working Counter & Arrow Controls */
+    .ba-controls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .ba-nav-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        user-select: none;
+    }
+
+    .ba-nav-btn:hover {
+        background: #00f0ff;
+        color: #000000;
+        box-shadow: 0 0 18px rgba(0, 240, 255, 0.8);
+        transform: scale(1.08);
+    }
+
+    .ba-counter {
+        color: #ffffff;
+        font-weight: 800;
+        font-size: 1rem;
+    }
+
+    .ba-counter span {
+        color: #00f0ff;
+        font-size: 1.2rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .ba-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .ba-text-content {
+            padding-left: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .ba-stage-wrapper {
+            height: 320px;
+        }
+    }
+    /* ==========================================
+   FIXED BEFORE & AFTER MOBILE ALIGNMENT
+   ========================================== */
+
+@media (max-width: 1024px) {
+    /* Prevent Section Overflow */
+    .ba-section {
+        padding: 50px 0 !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .ba-container {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: none !important;
+        gap: 30px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 16px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Fixed Stage Dimensions & Badge Clamping */
+    .ba-stage-wrapper {
+        width: 100% !important;
+        height: 280px !important;
+        border-radius: 20px !important;
+        position: relative !important;
+        touch-action: none;
+        box-sizing: border-box !important;
+    }
+
+    /* Keep Badges Inside Image Frame */
+    .ba-badge {
+        top: 12px !important;
+        font-size: 0.65rem !important;
+        padding: 4px 10px !important;
+        letter-spacing: 1px !important;
+        z-index: 6 !important;
+    }
+
+    .ba-badge.before-badge {
+        left: 12px !important;
+    }
+
+    .ba-badge.after-badge {
+        right: 12px !important;
+    }
+
+    /* Text Content Container Alignment */
+    .ba-text-content {
+        padding-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: left !important;
+    }
+
+    .ba-sub-tag {
+        font-size: 0.78rem !important;
+        letter-spacing: 1.5px !important;
+        margin-bottom: 8px !important;
+        display: block !important;
+    }
+
+    /* Heading Text Size & Wrapping Fix */
+    .ba-title {
+        font-size: 1.8rem !important;
+        line-height: 1.25 !important;
+        margin-bottom: 12px !important;
+        letter-spacing: -0.5px !important;
+        word-break: break-word !important;
+        width: 100% !important;
+    }
+
+    .ba-desc {
+        font-size: 0.9rem !important;
+        line-height: 1.55 !important;
+        margin-bottom: 20px !important;
+        word-break: break-word !important;
+        width: 100% !important;
+    }
+
+    /* Thumbnail Carousel Alignment */
+    .ba-thumbnails-row {
+        display: flex !important;
+        gap: 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        padding-bottom: 8px !important;
+        margin-bottom: 20px !important;
+        box-sizing: border-box !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .ba-thumb {
+        width: 60px !important;
+        height: 45px !important;
+        flex-shrink: 0 !important;
+        border-radius: 8px !important;
+    }
+
+    /* Navigation Controls Alignment */
+    .ba-controls {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 16px !important;
+        width: 100% !important;
+    }
+
+    .ba-nav-btn {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* Extra Small Mobile Devices (< 360px width) */
+@media (max-width: 360px) {
+    .ba-stage-wrapper {
+        height: 240px !important;
+    }
+
+    .ba-title {
+        font-size: 1.6rem !important;
+    }
+}
+</style>
+
+<section class="ba-section" id="before-after">
+    <div class="ba-container">
+        
+        <!-- Interactive Before & After Slider Stage -->
+        <div class="ba-stage-wrapper" id="baStage">
+            <!-- Badges -->
+            <div class="ba-badge before-badge">Before</div>
+            <div class="ba-badge after-badge">After</div>
+
+            <!-- After Image Layer (Clean) -->
+            <div class="ba-image-after">
+                <img id="baAfterImg" src="./1 (36)_22_11zon.webp" alt="Clean After Finish">
+            </div>
+
+            <!-- Before Image Layer (Dirty) -->
+            <div class="ba-image-before" id="baBeforeLayer">
+                <img id="baBeforeImg" src="./1 (17)_3_11zon.webp" alt="Dirty Before Finish">
+            </div>
+
+            <!-- Drag Handle Bar -->
+            <div class="ba-handle" id="baHandle">
+                <div class="ba-handle-button">
+                    <i class="fa-solid fa-arrows-left-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side Text & Working Controls -->
+        <div class="ba-text-content">
+            <span class="ba-sub-tag">Real Results</span>
+            <h2 class="ba-title">Real Results,<br><span>Real Shine</span></h2>
+            <p class="ba-desc">See the difference professional car wash and detailing can make to paint gloss, clarity, and overall finish.</p>
+            
+            <!-- Working Thumbnails Row -->
+            <div class="ba-thumbnails-row" id="baThumbRow">
+                <div class="ba-thumb active" data-index="0">
+                    <img src="./1 (31)_17_11zon.webp" alt="Ceramic Coating Pair">
+                </div>
+                <div class="ba-thumb" data-index="1">
+                    <img src="./1 (32)_18_11zon.webp" alt="Paint Correction Pair">
+                </div>
+                <div class="ba-thumb" data-index="2">
+                    <img src="./1 (33)_19_11zon.webp" alt="Wheel Detail Pair">
+                </div>
+                <div class="ba-thumb" data-index="3">
+                    <img src="./1 (34)_20_11zon.webp" alt="Interior Steam Pair">
+                </div>
+                <div class="ba-thumb" data-index="4">
+                    <img src="./1 (45)_31_11zon.webp" alt="Engine Bay Pair">
+                </div>
+            </div>
+
+            <!-- Working Arrow Controls & Counter -->
+            <div class="ba-controls">
+                <div class="ba-nav-btn" id="baPrevBtn" title="Previous Pair">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>
+                <div class="ba-counter">
+                    <span id="baCurrentCounter">01</span> / 05
+                </div>
+                <div class="ba-nav-btn" id="baNextBtn" title="Next Pair">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Full Interactivity Script -->
+<script>
+    (function initInteractiveBASlider() {
+        // 1. Data Store for 5 Before & After Sets
+        const baPairs = [
+            {
+                before: "https://images.unsplash.com/photo-1607860108855-64b2dc79ed30?auto=format&fit=crop&w=1400&q=90",
+                after: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1400&q=90"
+            },
+            {
+                before: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=90",
+                after: "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1400&q=90"
+            },
+            {
+                before: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1400&q=90",
+                after: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1400&q=90"
+            },
+            {
+                before: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=90",
+                after: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1400&q=90"
+            },
+            {
+                before: "https://images.unsplash.com/photo-1607860108855-64b2dc79ed30?auto=format&fit=crop&w=1400&q=90",
+                after: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=90"
+            }
+        ];
+
+        let currentIndex = 0;
+        const stage = document.getElementById('baStage');
+        const beforeLayer = document.getElementById('baBeforeLayer');
+        const handle = document.getElementById('baHandle');
+        const beforeImg = document.getElementById('baBeforeImg');
+        const afterImg = document.getElementById('baAfterImg');
+        const prevBtn = document.getElementById('baPrevBtn');
+        const nextBtn = document.getElementById('baNextBtn');
+        const counterDisplay = document.getElementById('baCurrentCounter');
+        const thumbs = document.querySelectorAll('#baThumbRow .ba-thumb');
+
+        if (!stage || !beforeLayer || !handle) return;
+
+        // 2. Dragging Logic for the Divider
+        let isDragging = false;
+
+        function updateDividerPosition(xPos) {
+            const rect = stage.getBoundingClientRect();
+            let offsetX = xPos - rect.left;
+            
+            if (offsetX < 0) offsetX = 0;
+            if (offsetX > rect.width) offsetX = rect.width;
+
+            const percentage = (offsetX / rect.width) * 100;
+            beforeLayer.style.width = percentage + '%';
+            handle.style.left = percentage + '%';
+        }
+
+        stage.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            updateDividerPosition(e.clientX);
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            updateDividerPosition(e.clientX);
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        stage.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                updateDividerPosition(e.touches[0].clientX);
+            }
+        });
+
+        // 3. Update Gallery Pair Function
+        function loadPair(index) {
+            currentIndex = index;
+            const data = baPairs[currentIndex];
+
+            if (beforeImg) beforeImg.src = data.before;
+            if (afterImg) afterImg.src = data.after;
+
+            // Reset divider to 50%
+            beforeLayer.style.width = '50%';
+            handle.style.left = '50%';
+
+            // Update Counter Text (01, 02, etc.)
+            if (counterDisplay) {
+                counterDisplay.textContent = (currentIndex + 1).toString().padStart(2, '0');
+            }
+
+            // Update Active Thumbnail State
+            thumbs.forEach((thumb, i) => {
+                if (i === currentIndex) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+
+        // 4. Click Handlers for Next / Prev Buttons
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const nextIndex = (currentIndex + 1) % baPairs.length;
+                loadPair(nextIndex);
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                const prevIndex = (currentIndex - 1 + baPairs.length) % baPairs.length;
+                loadPair(prevIndex);
+            });
+        }
+
+        // 5. Click Handlers for Thumbnails
+        thumbs.forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                const idx = parseInt(thumb.getAttribute('data-index'), 10);
+                if (!isNaN(idx)) {
+                    loadPair(idx);
+                }
+            });
+        });
+    })();
+</script>
+
+<!-- ==========================================
+     SECTION 4: CIRCULAR SPOTLIGHT GALLERY
+     ========================================== -->
+<style>
+    .circular-gallery-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .circular-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Side Orbital Circular Stage */
+    .spotlight-stage {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Ambient Orbital Rings */
+    .orbit-ring {
+        position: absolute;
+        inset: 40px;
+        border: 1px dashed rgba(0, 240, 255, 0.3);
+        border-radius: 50%;
+        animation: spinOrbit 40s linear infinite;
+        pointer-events: none;
+    }
+
+    @keyframes spinOrbit {
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Main Central Circle Image */
+    .center-spotlight {
+        position: relative;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #00f0ff;
+        box-shadow: 
+            0 0 40px rgba(0, 240, 255, 0.4),
+            0 0 80px rgba(0, 102, 255, 0.2);
+        z-index: 3;
+        transition: transform 0.5s ease;
+    }
+
+    .center-spotlight img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Satellite Circular Badges */
+    .satellite-node {
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid rgba(0, 240, 255, 0.35);
+        background: #0a0d14;
+        cursor: pointer;
+        z-index: 4;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .satellite-node img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+        transition: filter 0.3s ease;
+    }
+
+    .satellite-node:hover, .satellite-node.active {
+        border-color: #00f0ff;
+        transform: scale(1.18);
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.7);
+    }
+
+    .satellite-node:hover img, .satellite-node.active img {
+        filter: brightness(1);
+    }
+
+    /* Orbital Positions for 6 Satellites */
+    .node-1 { top: 10px; left: 50%; transform: translateX(-50%); }
+    .node-2 { top: 80px; right: 20px; }
+    .node-3 { bottom: 80px; right: 20px; }
+    .node-4 { bottom: 10px; left: 50%; transform: translateX(-50%); }
+    .node-5 { bottom: 80px; left: 20px; }
+    .node-6 { top: 80px; left: 20px; }
+
+    /* Right Text Box */
+    .spotlight-text-content {
+        padding-left: 20px;
+    }
+
+    .spotlight-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+
+    .spotlight-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .spotlight-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .spotlight-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 35px;
+    }
+
+    .explore-gallery-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 0.95rem;
+        font-weight: 800;
+        padding: 14px 32px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .explore-gallery-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .circular-container {
+            grid-template-columns: 1fr;
+            gap: 60px;
+        }
+        .spotlight-text-content {
+            padding-left: 0;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 580px) {
+        .spotlight-stage {
+            width: 320px;
+            height: 320px;
+        }
+        .center-spotlight {
+            width: 160px;
+            height: 160px;
+        }
+        .satellite-node {
+            width: 55px;
+            height: 55px;
+        }
+    }
+    /* ==========================================
+   CIRCULAR SPOTLIGHT GALLERY: MOBILE RESPONSIVE FIXES
+   ========================================== */
+
+@media (max-width: 1024px) {
+    /* Prevent Section Overflow & Reset Layout */
+    .circular-gallery-section {
+        padding: 60px 0 !important;
+        overflow-x: hidden !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .circular-container {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        padding: 0 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .spotlight-text-content {
+        padding-left: 0 !important;
+        text-align: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .spotlight-sub-tag {
+        font-size: 0.8rem !important;
+        letter-spacing: 2px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .spotlight-title {
+        font-size: 2.2rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 16px !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    .spotlight-desc {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 25px !important;
+    }
+
+    /* Center Align Button on Mobile */
+    .explore-gallery-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* Mobile Screens (< 580px) - Scale Down Orbital Stage */
+@media (max-width: 580px) {
+    .spotlight-stage {
+        width: 290px !important;
+        height: 290px !important;
+        margin: 0 auto !important;
+    }
+
+    .orbit-ring {
+        inset: 20px !important;
+    }
+
+    .center-spotlight {
+        width: 140px !important;
+        height: 140px !important;
+    }
+
+    .satellite-node {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    /* Adjusted Satellite Node Offsets for Compact 290px Stage */
+    .node-1 { top: 5px !important; }
+    .node-2 { top: 45px !important; right: 10px !important; }
+    .node-3 { bottom: 45px !important; right: 10px !important; }
+    .node-4 { bottom: 5px !important; }
+    .node-5 { bottom: 45px !important; left: 10px !important; }
+    .node-6 { top: 45px !important; left: 10px !important; }
+}
+
+/* Extra Small Mobile Devices (< 360px) */
+@media (max-width: 360px) {
+    .spotlight-stage {
+        width: 260px !important;
+        height: 260px !important;
+    }
+
+    .center-spotlight {
+        width: 125px !important;
+        height: 125px !important;
+    }
+
+    .satellite-node {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    .spotlight-title {
+        font-size: 1.85rem !important;
+    }
+}
+</style>
+
+<section class="circular-gallery-section" id="circular-spotlight">
+    <div class="circular-container">
+        
+        <!-- Left Side Circular Orbital Stage -->
+        <div class="spotlight-stage">
+            <div class="orbit-ring"></div>
+
+            <!-- Central Main Focus Circle -->
+            <div class="center-spotlight">
+                <img id="mainSpotlightImg" src="./1 (51)_37_11zon.webp" alt="Ceramic Detailing Spotlight">
+            </div>
+
+            <!-- 6 Interactive Satellite Circles -->
+            <div class="satellite-node node-1 active" data-img="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=90">
+                <img src="./1 (16)_2_11zon.webp" alt="Supercar Gloss">
+            </div>
+
+            <div class="satellite-node node-2" data-img="https://images.unsplash.com/photo-1607860108855-64b2dc79ed30?auto=format&fit=crop&w=1000&q=90">
+                <img src="./1 (11)_11zon.webp" alt="Foam Wash">
+            </div>
+
+            <div class="satellite-node node-3" data-img="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=90">
+                <img src="./1 (18)_4_11zon.webp" alt="Paint Polish">
+            </div>
+
+            <div class="satellite-node node-4" data-img="https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=90">
+                <img src="./1 (15)_1_11zon.webp" alt="Wheel Detail">
+            </div>
+
+            <div class="satellite-node node-5" data-img="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=90">
+                <img src="./1 (20)_6_11zon.webp" alt="Interior Steam">
+            </div>
+
+            <div class="satellite-node node-6" data-img="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=90">
+                <img src="./1 (24)_10_11zon.webp" alt="Engine Bay">
+            </div>
+        </div>
+
+        <!-- Right Side Editorial Text -->
+        <div class="spotlight-text-content">
+            <span class="spotlight-sub-tag">Full Coverage</span>
+            <h2 class="spotlight-title">360° Care<br><span>for Your Car</span></h2>
+            <p class="spotlight-desc">From wheels to windows, we bring out the best in every vehicle. Click any satellite orbital node to focus on specific studio detailing treatments.</p>
+            
+            <a href="./404.html" class="explore-gallery-btn">
+                <span>Explore Gallery</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- Orbital Node Click Interactivity Script -->
+<script>
+    (function initCircularSpotlight() {
+        const nodes = document.querySelectorAll('.satellite-node');
+        const mainImg = document.getElementById('mainSpotlightImg');
+
+        if (!nodes.length || !mainImg) return;
+
+        nodes.forEach(node => {
+            node.addEventListener('click', () => {
+                // Update active satellite ring styling
+                nodes.forEach(n => n.classList.remove('active'));
+                node.classList.add('active');
+
+                // Crossfade image into central spotlight
+                const newImgUrl = node.getAttribute('data-img');
+                if (newImgUrl) {
+                    mainImg.style.opacity = '0';
+                    setTimeout(() => {
+                        mainImg.src = newImgUrl;
+                        mainImg.style.opacity = '1';
+                    }, 200);
+                }
+            });
+        });
+    })();
+</script>
+<!-- ==========================================
+     SECTION 5: HORIZONTAL SCROLL GALLERY
+     ========================================== -->
+<style>
+    .horizontal-gallery-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .horizontal-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .horizontal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 40px;
+    }
+
+    .horizontal-sub {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .horizontal-title {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: -1px;
+        margin: 0;
+    }
+
+    .horizontal-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Scroll Navigation Arrows */
+    .horizontal-controls {
+        display: flex;
+        gap: 12px;
+    }
+
+    .scroll-arrow-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(10, 13, 20, 0.85);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        user-select: none;
+    }
+
+    .scroll-arrow-btn:hover {
+        background: #00f0ff;
+        color: #000000;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.7);
+        transform: scale(1.08);
+    }
+
+    /* Horizontal Scroll Track */
+    .horizontal-scroll-track {
+        display: flex;
+        gap: 24px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding: 10px 5px 30px;
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+    }
+
+    .horizontal-scroll-track::-webkit-scrollbar {
+        display: none; /* Hide scrollbar Chrome/Safari */
+    }
+
+    /* Scroll Cards */
+    .horizontal-card {
+        flex: 0 0 260px;
+        height: 360px;
+        position: relative;
+        border-radius: 22px;
+        overflow: hidden;
+        background: rgba(10, 13, 20, 0.9);
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        cursor: pointer;
+        transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .horizontal-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.8) contrast(1.15);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+
+    .horizontal-card:hover {
+        transform: translateY(-8px);
+        border-color: #00f0ff;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.3);
+    }
+
+    .horizontal-card:hover img {
+        transform: scale(1.08);
+        filter: brightness(0.95) contrast(1.2);
+    }
+
+    .card-label-overlay {
+        position: absolute;
+        bottom: 0;
+        inset-x: 0;
+        padding: 20px;
+        background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 20, 0.95) 100%);
+        z-index: 3;
+        text-align: center;
+    }
+
+    .card-label-title {
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: -0.3px;
+    }
+
+    /* Custom Scroll Progress Bar */
+    .scroll-progress-container {
+        width: 240px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        margin: 10px auto 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .scroll-progress-bar {
+        height: 100%;
+        width: 20%;
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+        transition: width 0.2s ease;
+    }
+</style>
+
+<section class="horizontal-gallery-section" id="horizontal-gallery">
+    <div class="horizontal-container">
+        
+        <!-- Section Header -->
+        <div class="horizontal-header">
+            <div>
+                <span class="horizontal-sub">Studio Workflow</span>
+                <h2 class="horizontal-title">Detailing <span>Services Lineup</span></h2>
+            </div>
+
+            <!-- Scroll Action Buttons -->
+            <div class="horizontal-controls">
+                <div class="scroll-arrow-btn" id="scrollLeftBtn" title="Scroll Left">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+                <div class="scroll-arrow-btn" id="scrollRightBtn" title="Scroll Right">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Horizontal Scrollable Track -->
+        <div class="horizontal-scroll-track" id="horizontalTrack">
+            
+            <!-- Card 1 -->
+            <div class="horizontal-card">
+                <img src="./1 (1)_11zon.webp" alt="Foam Wash">
+                <div class="card-label-overlay">
+                    <h3 class="card-label-title">Foam Wash</h3>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="horizontal-card">
+                <img src="./1 (2)_11zon.webp" alt="Wheel Care">
+                <div class="card-label-overlay">
+                    <h3 class="card-label-title">Wheel Care</h3>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="horizontal-card">
+                <img src="./1 (3)_11zon.webp" alt="Interior Cleaning">
+                <div class="card-label-overlay">
+                    <h3 class="card-label-title">Interior Cleaning</h3>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="horizontal-card">
+                <img src="./1 (4)_11zon.webp" alt="Polishing">
+                <div class="card-label-overlay">
+                    <h3 class="card-label-title">Polishing</h3>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="horizontal-card">
+                <img src="./1 (5)_11zon.webp" alt="Ceramic Coating">
+                <div class="card-label-overlay">
+                    <h3 class="card-label-title">Ceramic Coating</h3>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="horizontal-card">
+                <img src="./1 (44)_30_11zon.webp" alt="Engine Bay Care">
+                <div class="card-label-overlay">
+                    <h3 class="card-label-title">Engine Bay Care</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress-container">
+            <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Scroll Interactivity Script -->
+<script>
+    (function initHorizontalScrollGallery() {
+        const track = document.getElementById('horizontalTrack');
+        const leftBtn = document.getElementById('scrollLeftBtn');
+        const rightBtn = document.getElementById('scrollRightBtn');
+        const progressBar = document.getElementById('scrollProgressBar');
+
+        if (!track || !leftBtn || !rightBtn) return;
+
+        const cardWidth = 284; // 260px card + 24px gap
+
+        // Scroll Right
+        rightBtn.addEventListener('click', () => {
+            track.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+
+        // Scroll Left
+        leftBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+
+        // Update Progress Bar Position
+        track.addEventListener('scroll', () => {
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (maxScroll > 0) {
+                const percentage = (track.scrollLeft / maxScroll) * 100;
+                if (progressBar) {
+                    progressBar.style.width = Math.max(15, percentage) + '%';
+                }
+            }
+        });
+    })();
+</script>
+<!-- ==========================================
+     SECTION 6: ARCH FRAME GALLERY
+     ========================================== -->
+<style>
+    .arch-gallery-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .arch-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .arch-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 50px;
+    }
+
+    .arch-sub {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .arch-title {
+        font-size: 3rem;
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: -1px;
+        margin: 0;
+        line-height: 1.15;
+    }
+
+    .arch-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .arch-title-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        margin: 0;
+        text-align: right;
+        line-height: 1.5;
+    }
+
+    /* Arch Frames Grid Layout */
+    .arch-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        align-items: center;
+    }
+
+    /* Individual Arch Card */
+    .arch-card {
+        position: relative;
+        height: 480px;
+        border-top-left-radius: 140px;
+        border-top-right-radius: 140px;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        overflow: hidden;
+        border: 2px solid rgba(0, 240, 255, 0.25);
+        background: rgba(10, 13, 20, 0.9);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease, flex 0.5s ease;
+        flex: 1;
+    }
+
+    /* Center Featured Arch Focus */
+    .arch-card.featured-arch {
+        height: 540px;
+        border-color: #00f0ff;
+        box-shadow: 0 25px 65px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.3);
+        transform: translateY(-20px);
+    }
+
+    .arch-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.75) contrast(1.15);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+
+    .arch-card:hover {
+        transform: translateY(-12px);
+        border-color: #00f0ff;
+        box-shadow: 0 25px 55px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.25);
+    }
+
+    .arch-card.featured-arch:hover {
+        transform: translateY(-28px);
+    }
+
+    .arch-card:hover img {
+        transform: scale(1.08);
+        filter: brightness(0.95) contrast(1.2);
+    }
+
+    /* Arch Bottom Reflection Overlay */
+    .arch-overlay {
+        position: absolute;
+        bottom: 0;
+        inset-x: 0;
+        height: 120px;
+        background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 20, 0.95) 100%);
+        z-index: 3;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .arch-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .arch-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .arch-title-desc {
+            text-align: left;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .arch-grid {
+            grid-template-columns: 1fr;
+        }
+        .arch-card, .arch-card.featured-arch {
+            height: 380px;
+            transform: none !important;
+        }
+    }
+</style>
+
+<section class="arch-gallery-section" id="arch-gallery">
+    <div class="arch-container">
+        
+        <!-- Section Header -->
+        <div class="arch-header">
+            <div>
+                <span class="arch-sub">Studio Showcase</span>
+                <h2 class="arch-title">Different Cars<br><span>Same Care</span></h2>
+            </div>
+            <p class="arch-title-desc">
+                Every vehicle deserves<br>the royal treatment.
+            </p>
+        </div>
+
+        <!-- Arch Frames Grid (5 Curated Arches with Center Focus) -->
+        <div class="arch-grid">
+            
+            <!-- Arch 1 -->
+            <div class="arch-card">
+                <img src="./1 (11)_11zon.webp" alt="Luxury Hatchback Detail">
+                <div class="arch-overlay"></div>
+            </div>
+
+            <!-- Arch 2 -->
+            <div class="arch-card">
+                <img src="./1 (12)_11zon.webp" alt="Alloy Wheel Treatment">
+                <div class="arch-overlay"></div>
+            </div>
+
+            <!-- Arch 3: Featured Center Arch -->
+            <div class="arch-card featured-arch">
+                <img src="./1 (13)_11zon.webp" alt="Flagship Supercar Ceramic Gloss">
+                <div class="arch-overlay"></div>
+            </div>
+
+            <!-- Arch 4 -->
+            <div class="arch-card">
+                <img src="./1 (14)_11zon.webp" alt="SUV Paint Correction">
+                <div class="arch-overlay"></div>
+            </div>
+
+            <!-- Arch 5 -->
+            <div class="arch-card">
+                <img src="./1 (15)_1_11zon.webp" alt="Sports Coupe Interior">
+                <div class="arch-overlay"></div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 7: COLLAGE / OVERLAPPING LAYOUT
+     ========================================== -->
+<style>
+    .collage-gallery-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .collage-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Side Overlapping Collage Stage */
+    .collage-stage {
+        position: relative;
+        width: 100%;
+        height: 520px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .collage-badge-pill {
+        position: absolute;
+        top: 10px;
+        left: 0;
+        z-index: 5;
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 240, 255, 0.35);
+        color: #00f0ff;
+        font-size: 0.82rem;
+        font-weight: 800;
+        padding: 8px 20px;
+        border-radius: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    }
+
+    /* Overlapping Image Cards */
+    .collage-card {
+        position: absolute;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 2px solid rgba(0, 240, 255, 0.25);
+        background: rgba(10, 13, 20, 0.9);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .collage-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.8) contrast(1.15);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+
+    .collage-card:hover {
+        z-index: 10 !important;
+        border-color: #00f0ff;
+        transform: scale(1.08) rotate(0deg) !important;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.35);
+    }
+
+    .collage-card:hover img {
+        transform: scale(1.08);
+        filter: brightness(0.95) contrast(1.2);
+    }
+
+    /* Card Positions & Rotations */
+    .card-pos-1 {
+        width: 220px;
+        height: 290px;
+        top: 40px;
+        left: 40px;
+        transform: rotate(-10deg);
+        z-index: 2;
+    }
+
+    .card-pos-2 {
+        width: 240px;
+        height: 320px;
+        top: 20px;
+        left: 200px;
+        transform: rotate(6deg);
+        z-index: 3;
+    }
+
+    .card-pos-3 {
+        width: 210px;
+        height: 280px;
+        bottom: 30px;
+        left: 70px;
+        transform: rotate(8deg);
+        z-index: 4;
+    }
+
+    .card-pos-4 {
+        width: 250px;
+        height: 330px;
+        bottom: 20px;
+        right: 40px;
+        transform: rotate(-6deg);
+        z-index: 3;
+    }
+
+    /* Right Side Text Content */
+    .collage-text-content {
+        padding-left: 20px;
+    }
+
+    .collage-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .collage-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .collage-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 35px;
+    }
+
+    .full-gallery-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 0.95rem;
+        font-weight: 800;
+        padding: 14px 32px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .full-gallery-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .collage-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .collage-text-content {
+            padding-left: 0;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .collage-stage {
+            height: 380px;
+        }
+        .card-pos-1 { width: 140px; height: 180px; left: 10px; }
+        .card-pos-2 { width: 150px; height: 200px; left: 110px; }
+        .card-pos-3 { width: 130px; height: 170px; left: 30px; }
+        .card-pos-4 { width: 160px; height: 210px; right: 10px; }
+    }
+</style>
+
+<section class="collage-gallery-section" id="collage-gallery">
+    <div class="collage-container">
+        
+        <!-- Left Side Overlapping Collage -->
+        <div class="collage-stage">
+            <div class="collage-badge-pill">
+                Premium Detailing
+            </div>
+
+            <!-- Overlapping Cards -->
+            <div class="collage-card card-pos-1">
+                <img src="./1 (16)_2_11zon.webp" alt="Supercar Finish">
+            </div>
+
+            <div class="collage-card card-pos-2">
+                <img src="./1 (17)_3_11zon.webp" alt="Interior Detail">
+            </div>
+
+            <div class="collage-card card-pos-3">
+                <img src="./1 (18)_4_11zon.webp" alt="Snow Foam Wash">
+            </div>
+
+            <div class="collage-card card-pos-4">
+                <img src="./1 (33)_19_11zon.webp" alt="Rotary Polish">
+            </div>
+        </div>
+
+        <!-- Right Side Text Content -->
+        <div class="collage-text-content">
+            <h2 class="collage-title">Moments<br>of <span>Perfection</span></h2>
+            <p class="collage-desc">Real photos. Real care. Real shine. Hover over any frame to inspect our high-resolution detailing craftsmanship.</p>
+            
+            <a href="./404.html" class="full-gallery-btn">
+                <span>View Full Gallery</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 8: EXPANDED PARALLAX IMAGE SECTIONS
+     ========================================== -->
+<style>
+    .parallax-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .parallax-container {
+        max-width: 1400px; /* Expanded section container width */
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.4fr 0.6fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Expanded Grid Layout with Increased Heights */
+    .parallax-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .parallax-card {
+        position: relative;
+        height: 520px; /* Increased from 420px for a bigger visual presence */
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        background: rgba(10, 13, 20, 0.9);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95);
+        transform: skewX(-6deg);
+        cursor: pointer;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    /* Un-skew inner elements so imagery stays upright */
+    .parallax-card-inner {
+        width: 100%;
+        height: 100%;
+        transform: skewX(6deg) scale(1.18);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .parallax-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.75) contrast(1.15);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+
+    .parallax-card:hover {
+        transform: skewX(-6deg) translateY(-14px);
+        border-color: #00f0ff;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.35);
+        z-index: 5;
+    }
+
+    .parallax-card:hover img {
+        transform: scale(1.08);
+        filter: brightness(0.95) contrast(1.2);
+    }
+
+    /* Step Label Banner Overlay */
+    .parallax-card-overlay {
+        position: absolute;
+        bottom: 0;
+        inset-x: 0;
+        padding: 24px 18px;
+        background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 20, 0.95) 100%);
+        z-index: 3;
+    }
+
+    .step-number {
+        color: #00f0ff;
+        font-size: 1.25rem;
+        font-weight: 900;
+        margin-bottom: 2px;
+        text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    }
+
+    .step-name {
+        color: #ffffff;
+        font-size: 0.9rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Right Side Text Content */
+    .parallax-text-content {
+        padding-left: 20px;
+    }
+
+    .parallax-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 30px;
+    }
+
+    .parallax-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Controls & Play Button */
+    .parallax-controls {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .parallax-line-indicator {
+        width: 70px;
+        height: 4px;
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+    }
+
+    .parallax-play-btn {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: rgba(10, 13, 20, 0.85);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    }
+
+    .parallax-play-btn:hover {
+        background: #00f0ff;
+        color: #000000;
+        box-shadow: 0 0 25px rgba(0, 240, 255, 0.8);
+        transform: scale(1.1);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1100px) {
+        .parallax-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .parallax-text-content {
+            padding-left: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .parallax-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+        .parallax-card {
+            transform: none !important;
+            height: 360px;
+        }
+        .parallax-card-inner {
+            transform: none !important;
+        }
+    }
+</style>
+
+<section class="parallax-section" id="parallax-gallery">
+    <div class="parallax-container">
+        
+        <!-- Left Side Expanded Parallax Grid -->
+        <div class="parallax-grid">
+            
+            <!-- Step 01 -->
+            <div class="parallax-card">
+                <div class="parallax-card-inner">
+                    <img src="./1 (31)_17_11zon.webp" alt="Exterior Wash">
+                    <div class="parallax-card-overlay">
+                        <div class="step-number">01</div>
+                        <div class="step-name">Exterior Wash</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 02 -->
+            <div class="parallax-card">
+                <div class="parallax-card-inner">
+                    <img src="./1 (32)_18_11zon.webp" alt="Interior Cleaning">
+                    <div class="parallax-card-overlay">
+                        <div class="step-number">02</div>
+                        <div class="step-name">Interior Cleaning</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 03 -->
+            <div class="parallax-card">
+                <div class="parallax-card-inner">
+                    <img src="./1 (33)_19_11zon.webp" alt="Detailing">
+                    <div class="parallax-card-overlay">
+                        <div class="step-number">03</div>
+                        <div class="step-name">Detailing</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 04 -->
+            <div class="parallax-card">
+                <div class="parallax-card-inner">
+                    <img src="./1 (34)_20_11zon.webp" alt="Ceramic Coating">
+                    <div class="parallax-card-overlay">
+                        <div class="step-number">04</div>
+                        <div class="step-name">Ceramic Coating</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side Text Content -->
+        <div class="parallax-text-content">
+            <h2 class="parallax-title">Four Steps.<br>One Perfect<br><span>Finish.</span></h2>
+            
+            <div class="parallax-controls">
+                <div class="parallax-line-indicator"></div>
+                <!-- Play Button Redirects Directly to 404 Page -->
+                <a href="404.html" class="parallax-play-btn" title="Watch Process Video">
+                    <i class="fa-solid fa-play"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     FULL-SCREEN CAR WASHING SERVICES EXPLANATION
+     ========================================== -->
+<style>
+    .wash-explanation-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 100px 0;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* Ultra HD Background Stage with Overlay */
+    .wash-bg-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .wash-bg-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.55) contrast(1.2);
+    }
+
+    .wash-gradient-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.92) 85%),
+                    linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 40%, rgba(0, 0, 0, 0.95) 100%);
+    }
+
+    .wash-container {
+        max-width: 1300px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 3;
+    }
+
+    /* Header Section */
+    .wash-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 50px;
+    }
+
+    .wash-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    .wash-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 16px;
+    }
+
+    .wash-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .wash-desc {
+        color: #cbd5e1;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Grid Layout for Service Explanations */
+    .wash-services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-bottom: 50px;
+    }
+
+    .wash-card {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 24px;
+        padding: 32px 28px;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
+        transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .wash-card:hover {
+        transform: translateY(-8px);
+        border-color: #00f0ff;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.3);
+    }
+
+    .card-top {
+        margin-bottom: 20px;
+    }
+
+    .card-icon-wrapper {
+        width: 54px;
+        height: 54px;
+        border-radius: 16px;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    .card-title {
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
+    }
+
+    .card-text {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    /* Key Benefits List */
+    .benefits-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 16px;
+    }
+
+    .benefits-list li {
+        color: #cbd5e1;
+        font-size: 0.88rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+
+    .benefits-list li:last-child {
+        margin-bottom: 0;
+    }
+
+    .benefits-list i {
+        color: #00f0ff;
+        font-size: 0.8rem;
+    }
+
+    /* Action Footer Buttons */
+    .wash-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .wash-primary-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 1rem;
+        font-weight: 800;
+        padding: 16px 36px;
+        border-radius: 16px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 12px 30px rgba(0, 240, 255, 0.35);
+    }
+
+    .wash-primary-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 18px 40px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Responsive Grid */
+    @media (max-width: 1024px) {
+        .wash-services-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .wash-services-grid {
+            grid-template-columns: 1fr;
+        }
+        .wash-title {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<section class="wash-explanation-section" id="service-explanations">
+    <!-- Ultra HD Background Image -->
+    <div class="wash-bg-wrapper">
+        <img src="./1 (51)_37_11zon.webp" alt="Supercar Wash Detailing Process">
+        <div class="wash-gradient-overlay"></div>
+    </div>
+
+    <div class="wash-container">
+        <!-- Header -->
+        <div class="wash-header">
+            <span class="wash-sub-tag">Masterclass Detailing</span>
+            <h2 class="wash-title">Precision Car Wash <span>Services</span></h2>
+            <p class="wash-desc">Understanding our cleanroom-grade washing techniques engineered to safeguard your paint finish while restoring showroom clarity.</p>
+        </div>
+
+        <!-- 6 Detailed Service Cards -->
+        <div class="wash-services-grid">
+            
+            <!-- Service 1: Snow Foam Wash -->
+            <div class="wash-card">
+                <div class="card-top">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-soap"></i>
+                    </div>
+                    <h3 class="card-title">pH-Neutral Snow Foam</h3>
+                    <p class="card-text">High-pressure cannons blanket the vehicle in dense foam, encapsulating grit and road grime to dissolve dirt touchlessly without scratching the clear coat.</p>
+                </div>
+                <ul class="benefits-list">
+                    <li><i class="fa-solid fa-check"></i> Prevents swirl marks & micro-scratches</li>
+                    <li><i class="fa-solid fa-check"></i> 100% Safe for ceramic coatings</li>
+                </ul>
+            </div>
+
+            <!-- Service 2: Alloy Wheel & Caliper Care -->
+            <div class="wash-card">
+                <div class="card-top">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-circle-dot"></i>
+                    </div>
+                    <h3 class="card-title">Alloy & Caliper Decon</h3>
+                    <p class="card-text">Iron-dissolving chemical agents lift metallic brake dust and road tar from rim barrels and calipers, followed by soft-bristle detailing and high-temp sealant.</p>
+                </div>
+                <ul class="benefits-list">
+                    <li><i class="fa-solid fa-check"></i> Removes corrosive embedded brake dust</li>
+                    <li><i class="fa-solid fa-check"></i> Hydrophobic shield against future grime</li>
+                </ul>
+            </div>
+
+            <!-- Service 3: Interior Steam Sanitization -->
+            <div class="wash-card">
+                <div class="card-top">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-wind"></i>
+                    </div>
+                    <h3 class="card-title">Deep Interior Steam</h3>
+                    <p class="card-text">Superheated 140°C dry steam sanitizes AC vents, upholstery, and leather seams, killing 99.9% of bacteria and allergens without harsh chemical residues.</p>
+                </div>
+                <ul class="benefits-list">
+                    <li><i class="fa-solid fa-check"></i> Chemical-free deep purification</li>
+                    <li><i class="fa-solid fa-check"></i> Restores natural leather oils & matte look</li>
+                </ul>
+            </div>
+
+            <!-- Service 4: Paint Correction Polishing -->
+            <div class="wash-card">
+                <div class="card-top">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="card-title">Paint Correction Polish</h3>
+                    <p class="card-text">Dual-action rotary buffers level micro-scratches, oxidation, and haze using precision micro-abrasive compounds to reveal optical paint mirror depth.</p>
+                </div>
+                <ul class="benefits-list">
+                    <li><i class="fa-solid fa-check"></i> Eliminates up to 90% of spiderweb swirls</li>
+                    <li><i class="fa-solid fa-check"></i> Restores deep color reflections</li>
+                </ul>
+            </div>
+
+            <!-- Service 5: Ceramic Shield Coating -->
+            <div class="wash-card">
+                <div class="card-top">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="card-title">Nano-Ceramic 9H Shield</h3>
+                    <p class="card-text">A hand-applied silica glass polymer fuses directly with factory clear coat, providing 3+ years of protection against UV rays, acid rain, and bird drops.</p>
+                </div>
+                <ul class="benefits-list">
+                    <li><i class="fa-solid fa-check"></i> Extreme hydrophobic water beading</li>
+                    <li><i class="fa-solid fa-check"></i> Effortless self-cleaning properties</li>
+                </ul>
+            </div>
+
+            <!-- Service 6: Engine Bay Vapor Detail -->
+            <div class="wash-card">
+                <div class="card-top">
+                    <div class="card-icon-wrapper">
+                        <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3 class="card-title">Engine Bay Vapor Clean</h3>
+                    <p class="card-text">Low-moisture vapor degreasing clears heavy oil and dust from engine compartments safely without wetting sensitive electronic wiring and sensors.</p>
+                </div>
+                <ul class="benefits-list">
+                    <li><i class="fa-solid fa-check"></i> Safe for modern electrical components</li>
+                    <li><i class="fa-solid fa-check"></i> Anti-static dress prevents dust buildup</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- CTA Action Button -->
+        <div class="wash-actions">
+            <a href="404.html" class="wash-primary-btn">
+                <span>Book a Wash Package</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 9: INTERACTIVE HOVER CARDS
+     ========================================== -->
+<style>
+    .hover-cards-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .hover-cards-container {
+        max-width: 1350px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hover-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+    }
+
+    /* Interactive Vertical Card */
+    .hover-card {
+        position: relative;
+        height: 480px;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        background: rgba(10, 13, 20, 0.9);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9);
+        cursor: pointer;
+        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .hover-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.7) contrast(1.15);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+    }
+
+    .hover-card:hover {
+        transform: translateY(-14px);
+        border-color: #00f0ff;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.3);
+    }
+
+    .hover-card:hover img {
+        transform: scale(1.1);
+        filter: brightness(0.9) contrast(1.2);
+    }
+
+    /* Content Overlay */
+    .hover-card-overlay {
+        position: absolute;
+        inset: 0;
+        padding: 28px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: linear-gradient(180deg, transparent 30%, rgba(10, 13, 20, 0.95) 100%);
+        z-index: 3;
+    }
+
+    .hover-card-title {
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+        letter-spacing: -0.3px;
+        transition: color 0.3s ease;
+    }
+
+    .hover-card:hover .hover-card-title {
+        color: #00f0ff;
+    }
+
+    .hover-card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: gap 0.3s ease, color 0.3s ease;
+    }
+
+    .hover-card-link i {
+        font-size: 0.75rem;
+        transition: transform 0.3s ease;
+    }
+
+    .hover-card:hover .hover-card-link {
+        color: #ffffff;
+        gap: 12px;
+    }
+
+    .hover-card:hover .hover-card-link i {
+        transform: translateX(4px);
+        color: #00f0ff;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1100px) {
+        .hover-cards-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hover-cards-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .hover-card {
+            height: 380px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hover-cards-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="hover-cards-section" id="hover-cards">
+    <div class="hover-cards-container">
+        
+        <div class="hover-cards-grid">
+            
+            <!-- Card 1: Exterior Wash -->
+            <div class="hover-card">
+                <img src="./1 (40)_26_11zon.webp" alt="Exterior Wash">
+                <div class="hover-card-overlay">
+                    <h3 class="hover-card-title">Exterior Wash</h3>
+                    <a href="404.html" class="hover-card-link">
+                        <span>View Details</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2: Wheel Care -->
+            <div class="hover-card">
+                <img src="./1 (42)_28_11zon.webp" alt="Wheel Care">
+                <div class="hover-card-overlay">
+                    <h3 class="hover-card-title">Wheel Care</h3>
+                    <a href="404.html" class="hover-card-link">
+                        <span>View Details</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 3: Interior Cleaning -->
+            <div class="hover-card">
+                <img src="./1 (44)_30_11zon.webp" alt="Interior Cleaning">
+                <div class="hover-card-overlay">
+                    <h3 class="hover-card-title">Interior Cleaning</h3>
+                    <a href="404.html" class="hover-card-link">
+                        <span>View Details</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 4: Polishing -->
+            <div class="hover-card">
+                <img src="./1 (45)_31_11zon.webp" alt="Polishing">
+                <div class="hover-card-overlay">
+                    <h3 class="hover-card-title">Polishing</h3>
+                    <a href="404.html" class="hover-card-link">
+                        <span>View Details</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 5: Ceramic Coating -->
+            <div class="hover-card">
+                <img src="./1 (47)_33_11zon.webp" alt="Ceramic Coating">
+                <div class="hover-card-overlay">
+                    <h3 class="hover-card-title">Ceramic Coating</h3>
+                    <a href="404.html" class="hover-card-link">
+                        <span>View Details</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 10: FLOATING ELEMENTS / CREATIVE SHAPE LAYOUT
+     ========================================== -->
+<style>
+    .floating-shape-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .floating-shape-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr 0.8fr;
+        gap: 40px;
+        align-items: center;
+    }
+
+    /* Left Editorial Content */
+    .shape-text-content {
+        padding-right: 10px;
+    }
+
+    .shape-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+
+    .shape-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .shape-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .shape-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 35px;
+    }
+
+    .explore-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 0.95rem;
+        font-weight: 800;
+        padding: 14px 32px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .explore-btn:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Center Organic Fluid Blob Mask & Floating Orbs Stage */
+    .blob-stage-wrapper {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Liquid Organic Neon Background Glow */
+    .blob-bg-glow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(0, 102, 255, 0.1) 60%, transparent 80%);
+        border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        animation: blobMorph 12s ease-in-out infinite alternate;
+        filter: blur(20px);
+    }
+
+    /* Central Liquid Shape Mask */
+    .blob-image-mask {
+        position: relative;
+        width: 90%;
+        height: 90%;
+        border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+        overflow: hidden;
+        border: 2px solid #00f0ff;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95), 0 0 40px rgba(0, 240, 255, 0.4);
+        animation: blobMorph 12s ease-in-out infinite alternate;
+        z-index: 3;
+    }
+
+    .blob-image-mask img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.85) contrast(1.2);
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .blob-image-mask:hover img {
+        transform: scale(1.1);
+    }
+
+    @keyframes blobMorph {
+        0% { border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%; }
+        50% { border-radius: 58% 42% 38% 62% / 52% 65% 35% 48%; }
+        100% { border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%; }
+    }
+
+    /* Floating Water/Shine Orbs */
+    .floating-orb {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, rgba(0, 240, 255, 0.9), rgba(0, 102, 255, 0.4));
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+        pointer-events: none;
+        z-index: 4;
+        animation: floatOrb 6s ease-in-out infinite alternate;
+    }
+
+    .orb-1 { width: 38px; height: 38px; top: 20px; left: 10px; animation-delay: 0s; }
+    .orb-2 { width: 22px; height: 22px; bottom: 30px; left: 20px; animation-delay: 1.5s; }
+    .orb-3 { width: 45px; height: 45px; bottom: 40px; right: 10px; animation-delay: 3s; }
+    .orb-4 { width: 18px; height: 18px; top: 40px; right: 30px; animation-delay: 2.2s; }
+
+    @keyframes floatOrb {
+        0% { transform: translateY(0px) scale(1); }
+        100% { transform: translateY(-18px) scale(1.1); }
+    }
+
+    /* Right Side Floating Feature Badges */
+    .feature-badges-column {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .feature-badge-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        padding: 16px 20px;
+        border-radius: 18px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-badge-card:hover {
+        transform: translateX(-6px);
+        border-color: #00f0ff;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.25);
+    }
+
+    .badge-icon-circle {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+        flex-shrink: 0;
+    }
+
+    .badge-text-label {
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: -0.2px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .floating-shape-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .shape-text-content {
+            text-align: center;
+            padding-right: 0;
+        }
+        .feature-badges-column {
+            max-width: 450px;
+            margin: 0 auto;
+            width: 100%;
+        }
+    }
+</style>
+
+<section class="floating-shape-section" id="creative-shape-gallery">
+    <div class="floating-shape-container">
+        
+        <!-- Left Editorial Text Box -->
+        <div class="shape-text-content">
+            <span class="shape-sub-tag">Liquid Gloss</span>
+            <h2 class="shape-title">A Gallery<br>That <span>Shines</span></h2>
+            <p class="shape-desc">Explore our work and see how we turn every car into a masterpiece with flawless ceramic protection and mirror reflections.</p>
+            
+            <a href="404.html" class="explore-btn">
+                <span>Explore Gallery</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Center Fluid Organic Blob & Floating Orbs -->
+        <div class="blob-stage-wrapper">
+            <div class="blob-bg-glow"></div>
+            
+            <!-- Floating Orbs -->
+            <div class="floating-orb orb-1"></div>
+            <div class="floating-orb orb-2"></div>
+            <div class="floating-orb orb-3"></div>
+            <div class="floating-orb orb-4"></div>
+
+            <!-- Liquid Central Image Mask -->
+            <div class="blob-image-mask">
+                <img src="./1 (12)_11zon.webp" alt="Liquid Reflection Detailing">
+            </div>
+        </div>
+
+        <!-- Right Side Feature Badges Column -->
+        <div class="feature-badges-column">
+            
+            <!-- Badge 1 -->
+            <div class="feature-badge-card">
+                <div class="badge-icon-circle">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                <span class="badge-text-label">Clean & Fresh</span>
+            </div>
+
+            <!-- Badge 2 -->
+            <div class="feature-badge-card">
+                <div class="badge-icon-circle">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <span class="badge-text-label">Premium Care</span>
+            </div>
+
+            <!-- Badge 3 -->
+            <div class="feature-badge-card">
+                <div class="badge-icon-circle">
+                    <i class="fa-solid fa-user-check"></i>
+                </div>
+                <span class="badge-text-label">Expert Team</span>
+            </div>
+
+            <!-- Badge 4 -->
+            <div class="feature-badge-card">
+                <div class="badge-icon-circle">
+                    <i class="fa-solid fa-face-smile"></i>
+                </div>
+                <span class="badge-text-label">Happy Customers</span>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     FULL-SCREEN CTA SECTION WITH BACKGROUND IMAGE
+     ========================================== -->
+<style>
+    .cta-fullscreen-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* Full-Bleed Ultra HD Background Image */
+    .cta-bg-wrapper {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .cta-bg-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.55) contrast(1.2);
+    }
+
+    /* Gradient Overlays for Maximum Readability */
+    .cta-gradient-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.92) 85%),
+                    linear-gradient(180deg, rgba(0, 0, 0, 0.85) 0%, transparent 40%, rgba(0, 0, 0, 0.95) 100%);
+        z-index: 2;
+    }
+
+    /* Ambient Glow Orb */
+    .cta-glow-orb {
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(0, 240, 255, 0.18) 0%, rgba(0, 102, 255, 0.05) 60%, transparent 75%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 2;
+        filter: blur(50px);
+    }
+
+    /* Content Box */
+    .cta-content-container {
+        max-width: 900px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 3;
+        text-align: center;
+    }
+
+    .cta-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
+        display: inline-block;
+        text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+    }
+
+    .cta-title {
+        font-size: 4rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.1;
+        letter-spacing: -1.5px;
+        margin-bottom: 24px;
+    }
+
+    .cta-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .cta-description {
+        color: #cbd5e1;
+        font-size: 1.2rem;
+        line-height: 1.7;
+        max-width: 650px;
+        margin: 0 auto 45px;
+        text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Action Buttons Row */
+    .cta-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .cta-primary-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 1rem;
+        font-weight: 800;
+        padding: 18px 40px;
+        border-radius: 16px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.4);
+    }
+
+    .cta-primary-btn:hover {
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 20px 45px rgba(0, 240, 255, 0.7);
+    }
+
+    .cta-secondary-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 800;
+        padding: 18px 40px;
+        border-radius: 16px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+    }
+
+    .cta-secondary-btn:hover {
+        border-color: #00f0ff;
+        color: #00f0ff;
+        transform: translateY(-4px);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.25);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .cta-title {
+            font-size: 2.8rem;
+        }
+        .cta-description {
+            font-size: 1.05rem;
+        }
+        .cta-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+        .cta-primary-btn, .cta-secondary-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<section class="cta-fullscreen-section" id="studio-cta">
+    <!-- Full-Bleed Background Image -->
+    <div class="cta-bg-wrapper">
+        <img src="./1 (2)_11zon.webp" alt="Supercar Foam Wash CTA Background">
+        <div class="cta-gradient-overlay"></div>
+    </div>
+
+    <div class="cta-glow-orb"></div>
+
+    <!-- Content Container -->
+    <div class="cta-content-container">
+        <span class="cta-sub-tag">Ready for Perfection?</span>
+        <h2 class="cta-title">Give Your Ride The<br><span>Ultimate Treatment</span></h2>
+        <p class="cta-description">
+            Experience pH-neutral foam washes, deep interior steam purges, 9H nano-ceramic matrix shields, and showroom mirror gloss finishes tailored exclusively for luxury automobiles.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="cta-actions">
+            <a href="404.html" class="cta-primary-btn">
+                <span>Book Wash Service</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="404.html" class="cta-secondary-btn">
+                <span>View Packages</span>
+                <i class="fa-solid fa-shield-halved"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="./index.html" class="logo">
+                    <img src="./logo.webp" alt="Stackly Logo" class="custom-logo" onerror="this.style.display='none';">
+                </a>
+                <p>Setting the absolute benchmark in professional automobile detailing and eco-friendly car wash services.</p>
+                <!-- Two extra lines of description below logo -->
+                <p class="footer-extra-desc"> Trusted by elite drivers for uncompromised, swirl-free gloss protection.</p>
+                
+                <div class="social-icons" style="margin-top: 20px;">
+                    <a href="./404.html"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="./404.html"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="./404.html"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="./404.html"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about us.html">About Us</a></li>
+                    <li><a href="./our services.html">Our Services</a></li>
+                    <li><a href="./washpackages.html">Wash Packages</a></li>
+                    <li><a href="./gallery.html">Gallery</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="./404.html">Foam Bath</a></li>
+                    <li><a href="./404.html">Interior Detailing</a></li>
+                    <li><a href="./404.html">Ceramic Coating</a></li>
+                    <li><a href="./404.html">Engine Bay Clean</a></li>
+                    <li><a href="./404.html">Underbody Wash</a></li>
+                    <li><a href="./404.html">Full Automotive</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Subscribe for special seasonal discounts and auto care tips.</p>
+                <!-- Form with validation and 404 redirect script -->
+                <form id="newsletterForm" onsubmit="handleNewsletterRedirect(event)">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                    <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+
+                <!-- Phone number, Location, and Map placed directly BELOW the newsletter subscribe button -->
+                <div class="footer-location-block">
+                    <p class="footer-phone"><i class="fa-solid fa-phone" style="color: var(--accent-cyan); margin-right: 8px;"></i> +91 9842545675</p>
+                    <p class="footer-address"><i class="fa-solid fa-location-dot" style="color: var(--accent-cyan); margin-right: 8px;"></i> 5/42  Salem, Tamil Nadu</p>
+                    <div class="footer-map-embed">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62552.47772659356!2d78.10228795!3d11.664325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbabf0141a61905a5%3A0x742468307e868f77!2sSalem%2C%23!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin" width="100%" height="110" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Stackly Car Wash Services. All rights reserved.</p>
+            <div class="footer-policy">
+                <a href="./404.html">Privacy Policy</a>
+                <a href="./404.html">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function handleNewsletterRedirect(event) {
+        event.preventDefault(); 
+        const emailInput = document.getElementById('newsletterEmail');
+        
+        if (emailInput.value.trim() === '') {
+            emailInput.reportValidity(); 
+            return;
+        }
+
+        window.location.href = '404.html?email=' + encodeURIComponent(emailInput.value);
+    }
+</script>
+    <!-- JavaScript code -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+    </script>
+</body>
+</html>

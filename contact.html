@@ -1,0 +1,2947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stackly | Premium Car Wash & Detailing Services</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <!-- Left: Logo -->
+            <a href="./index.html" class="logo">
+                <img src="./logo.webp" alt="Stackly Logo" class="custom-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';">
+                <div class="logo-icon" id="fallback-logo" style="display:none;">
+                    <i class="fa-solid fa-droplet"></i>
+                </div>
+                
+            </a>
+
+            <!-- Center/Mobile Drawer Navigation Menu -->
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="./index.html" class="nav-link ">Home</a></li>
+                    <li><a href="./about us.html" class="nav-link">About Us</a></li>
+                    <li><a href="./our services.html" class="nav-link">Our Services</a></li>
+                    <li><a href="./washpackages.html" class="nav-link">Wash Packages</a></li>
+                    <li><a href="./gallery.html" class="nav-link">Gallery</a></li>
+                    <li><a href="./contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+                <div class="mobile-login-wrapper">
+                    <a href="login.html" class="btn btn-login-cyan btn-block"><i class="fa-regular fa-user"></i> Login to Dashboard</a>
+                </div>
+            </nav>
+
+            <!-- Right: Cyan Login Button & Hamburger Toggle -->
+            <div class="nav-right">
+                <a href="login.html" class="btn-login-cyan desktop-only">
+                    <i class="fa-regular fa-user"></i> Login
+                </a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+<!-- ==========================================
+     SECTION 1: HERO SECTION - FULL SCREEN LAYOUT
+     ========================================== -->
+<style>
+    .contact-hero-section {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    /* Ultra HD Bright Background Stage */
+    .contact-hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .contact-hero-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        /* Increased brightness and contrast for maximum clarity */
+        filter: brightness(0.85) contrast(1.2) saturate(1.1);
+    }
+
+    /* Subtle Glass Fade Overlay to keep text readable without darkening the image */
+    .contact-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.7) 100%);
+        z-index: 2;
+    }
+
+    .contact-hero-container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Left Side Editorial Header */
+    .contact-hero-text {
+        max-width: 620px;
+    }
+
+    .contact-hero-sub {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 16px;
+        display: inline-block;
+        text-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+    }
+
+    .contact-hero-title {
+        font-size: 3.8rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.1;
+        letter-spacing: -1.5px;
+        margin-bottom: 20px;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+    }
+
+    .contact-hero-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .contact-hero-desc {
+        color: #f1f5f9;
+        font-size: 1.15rem;
+        line-height: 1.6;
+        margin-bottom: 35px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Feature Badges Row */
+    .contact-hero-badges {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .contact-badge-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(10, 13, 20, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        padding: 10px 22px;
+        border-radius: 30px;
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 700;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    }
+
+    .contact-badge-item i {
+        color: #00f0ff;
+    }
+
+    /* Right Side Floating Watermark Slogan */
+    .contact-hero-watermark {
+        font-size: 3rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.3);
+        text-align: right;
+        line-height: 1.2;
+        font-style: italic;
+        letter-spacing: -1px;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+        pointer-events: none;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 968px) {
+        .contact-hero-container {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 40px;
+        }
+        .contact-hero-title {
+            font-size: 2.8rem;
+        }
+        .contact-hero-watermark {
+            text-align: left;
+            font-size: 2.2rem;
+        }
+    }
+</style>
+
+<section class="contact-hero-section" id="contact-hero">
+    <!-- Ultra HD Clear Background Image -->
+    <div class="contact-hero-bg">
+        <img src="./1 (26)_12_11zon.webp" alt="Supercar Wash Salem Tamil Nadu">
+        <div class="contact-hero-overlay"></div>
+    </div>
+
+    <!-- Container Content -->
+    <div class="contact-hero-container">
+        <!-- Left Content -->
+        <br>
+        <br><div class="contact-hero-text">
+            <span class="contact-hero-sub">Get In Touch</span>
+            <h1 class="contact-hero-title">Contact Us<br><span>We're Here to Help</span></h1>
+            <p class="contact-hero-desc">Have a question, need support, or want to book a service at our Salem detailing studio? Our team is just a message away.</p>
+            
+            <div class="contact-hero-badges">
+                <div class="contact-badge-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Quick Response</span>
+                </div>
+                <div class="contact-badge-item">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Trusted Support</span>
+                </div>
+                <div class="contact-badge-item">
+                    <i class="fa-solid fa-user-check"></i>
+                    <span>Customer First</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side Floating Watermark Text -->
+        <div class="contact-hero-watermark">
+            Drive Clean<br>Feel Great
+        </div>
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 2: CONTACT INFORMATION - CARD LAYOUT
+     ========================================== -->
+<style>
+    .contact-info-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .contact-info-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Editorial Header */
+    .contact-info-text {
+        padding-right: 20px;
+    }
+
+    .contact-info-sub {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+
+    .contact-info-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .contact-info-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .contact-info-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
+    /* Right Side 2x2 Glassmorphic Cards Grid */
+    .info-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .info-card {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 24px;
+        padding: 30px 24px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .info-card:hover {
+        transform: translateY(-6px);
+        border-color: #00f0ff;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.25);
+    }
+
+    .info-card-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .info-icon-wrapper {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        flex-shrink: 0;
+    }
+
+    .info-card-label {
+        color: #ffffff;
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: -0.3px;
+    }
+
+    .info-card-details {
+        color: #cbd5e1;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .info-card-details a {
+        color: #cbd5e1;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: block;
+    }
+
+    .info-card-details a:hover {
+        color: #00f0ff;
+    }
+
+    /* Card Background Preview Image (for Location Card) */
+    .card-preview-bg {
+        position: absolute;
+        inset: 0;
+        opacity: 0.15;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .card-preview-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .info-card-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Responsive Grid */
+    @media (max-width: 1024px) {
+        .contact-info-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .contact-info-text {
+            padding-right: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .info-cards-grid {
+            grid-template-columns: 1fr;
+        }
+        .contact-info-title {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<section class="contact-info-section" id="contact-details">
+    <div class="contact-info-container">
+        
+        <!-- Left Editorial Text -->
+        <div class="contact-info-text">
+            <span class="contact-info-sub">Contact Details</span>
+            <h2 class="contact-info-title">We're Always<br><span>Within Reach</span></h2>
+            <p class="contact-info-desc">Visit us, call us, or send us a message. We'd love to hear from you and bring top-tier auto detailing care to your car in Salem!</p>
+        </div>
+
+        <!-- Right Side 2x2 Glassmorphic Cards -->
+        <div class="info-cards-grid">
+            
+            <!-- Card 1: Phone -->
+            <div class="info-card">
+                <div class="info-card-content">
+                    <div class="info-card-header">
+                        <div class="info-icon-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <h3 class="info-card-label">Phone</h3>
+                    </div>
+                    <div class="info-card-details">
+                        <a href="./404.html">+91 98765 43210</a>
+                        <a href="./404.html">+91 87654 32109</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Email -->
+            <div class="info-card">
+                <div class="info-card-content">
+                    <div class="info-card-header">
+                        <div class="info-icon-wrapper">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <h3 class="info-card-label">Email</h3>
+                    </div>
+                    <div class="info-card-details">
+                        <a href="./404.html">info@stacklywash.com</a>
+                        <a href="./404.html">support@stacklywash.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Location (Salem, Tamil Nadu) -->
+            <div class="info-card">
+                <div class="card-preview-bg">
+                    <img src="./1 (3)_11zon.webp" alt="Salem Studio">
+                </div>
+                <div class="info-card-content">
+                    <div class="info-card-header">
+                        <div class="info-icon-wrapper">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <h3 class="info-card-label">Studio Location</h3>
+                    </div>
+                    <div class="info-card-details">
+                        123, Omalur Main Road,<br>
+                        5-Roads Junction, Salem,<br>
+                        Tamil Nadu - 636004
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Business Hours -->
+            <div class="info-card">
+                <div class="info-card-content">
+                    <div class="info-card-header">
+                        <div class="info-icon-wrapper">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <h3 class="info-card-label">Business Hours</h3>
+                    </div>
+                    <div class="info-card-details">
+                        <strong>Mon - Sat:</strong> 8:00 AM - 8:00 PM<br>
+                        <strong>Sunday:</strong> 9:00 AM - 6:00 PM
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 3: CONTACT FORM - SPLIT LAYOUT
+     ========================================== -->
+<style>
+    .contact-form-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .contact-form-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Side Glassmorphic Form Card */
+    .contact-form-card {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 28px;
+        padding: 40px 36px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+    }
+
+    .form-card-header {
+        margin-bottom: 30px;
+    }
+
+    .form-card-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        margin: 0 0 10px;
+        letter-spacing: -0.5px;
+    }
+
+    .form-card-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    /* Form Fields Grid */
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .form-group-full {
+        grid-column: span 2;
+    }
+
+    .form-group {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .form-label {
+        color: #cbd5e1;
+        font-size: 0.88rem;
+        font-weight: 700;
+    }
+
+    .form-label span {
+        color: #00f0ff;
+    }
+
+    .form-input, .form-select, .form-textarea {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 12px;
+        padding: 14px 18px;
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .form-select {
+        cursor: pointer;
+        color: #94a3b8;
+    }
+
+    .form-select option {
+        background: #0a0d14;
+        color: #ffffff;
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 110px;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+        border-color: #00f0ff;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        color: #ffffff;
+    }
+
+    /* Validation Inline Message */
+    .validation-msg {
+        color: #ff4d4d;
+        font-size: 0.78rem;
+        font-weight: 600;
+        min-height: 16px;
+        display: block;
+        margin-top: 2px;
+    }
+
+    .form-input.is-invalid, .form-select.is-invalid, .form-textarea.is-invalid {
+        border-color: #ff4d4d !important;
+        box-shadow: 0 0 12px rgba(255, 77, 77, 0.3) !important;
+    }
+
+    .form-input.is-valid, .form-select.is-valid, .form-textarea.is-valid {
+        border-color: #00f0ff !important;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 1rem;
+        font-weight: 800;
+        padding: 16px;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 12px 30px rgba(0, 240, 255, 0.35);
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Right Side Banner Stage */
+    .split-banner-stage {
+        position: relative;
+        height: 100%;
+        min-height: 540px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 40px;
+    }
+
+    .split-banner-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .split-banner-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.7) contrast(1.2);
+    }
+
+    .split-banner-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10, 13, 20, 0.4) 0%, rgba(10, 13, 20, 0.95) 100%);
+        z-index: 2;
+    }
+
+    .split-banner-content {
+        position: relative;
+        z-index: 3;
+    }
+
+    .banner-slogan {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.2;
+        letter-spacing: -1px;
+        font-style: italic;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    }
+
+    .banner-slogan span {
+        color: #00f0ff;
+    }
+
+    /* Bottom Support Badges */
+    .banner-badges-row {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .badge-box {
+        text-align: center;
+    }
+
+    .badge-box-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(0, 240, 255, 0.15);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 8px;
+        font-size: 1rem;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    .badge-box-label {
+        color: #ffffff;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 1024px) {
+        .contact-form-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .split-banner-stage {
+            min-height: 380px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+        .form-group-full {
+            grid-column: span 1;
+        }
+        .contact-form-card {
+            padding: 28px 20px;
+        }
+    }
+</style>
+
+<section class="contact-form-section" id="contact-form-split">
+    <div class="contact-form-container">
+        
+        <!-- Left Side Glassmorphic Form Card -->
+        <div class="contact-form-card">
+            <div class="form-card-header">
+                <h2 class="form-card-title">Send Us a Message</h2>
+                <p class="form-card-desc">Fill in the form below and our Salem team will get back to you shortly.</p>
+            </div>
+
+            <form id="splitContactForm" novalidate>
+                <div class="form-grid">
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label class="form-label">Full Name <span>*</span></label>
+                        <input type="text" class="form-input" id="fullNameInput" placeholder="Enter your name">
+                        <span class="validation-msg" id="nameError"></span>
+                    </div>
+
+                    <!-- Email Address -->
+                    <div class="form-group">
+                        <label class="form-label">Email Address <span>*</span></label>
+                        <input type="email" class="form-input" id="emailInput" placeholder="Enter your email">
+                        <span class="validation-msg" id="emailError"></span>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        <label class="form-label">Phone Number <span>*</span></label>
+                        <input type="tel" class="form-input" id="phoneInput" placeholder="Enter phone number">
+                        <span class="validation-msg" id="phoneError"></span>
+                    </div>
+
+                    <!-- Service Interest -->
+                    <div class="form-group">
+                        <label class="form-label">Service Of Interest <span>*</span></label>
+                        <select class="form-select" id="serviceSelect">
+                            <option value="" disabled selected>Select a service</option>
+                            <option value="snow-foam">pH-Neutral Snow Foam Wash</option>
+                            <option value="wheel-care">Alloy Wheel & Caliper Care</option>
+                            <option value="interior-steam">Deep Interior Steam Sanitization</option>
+                            <option value="paint-correction">Paint Correction & Polishing</option>
+                            <option value="ceramic-coating">Nano-Ceramic 9H Shield</option>
+                            <option value="engine-bay">Engine Bay Vapor Detailing</option>
+                        </select>
+                        <span class="validation-msg" id="serviceError"></span>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="form-group form-group-full">
+                        <label class="form-label">Message <span>*</span></label>
+                        <textarea class="form-textarea" id="messageInput" placeholder="Type your message here..."></textarea>
+                        <span class="validation-msg" id="messageError"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span>Send Message</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Side Banner Stage -->
+        <div class="split-banner-stage">
+            <div class="split-banner-bg">
+                <img src="./1 (35)_21_11zon.webp" alt="Salem Detailing Studio">
+                <div class="split-banner-overlay"></div>
+            </div>
+
+            <div class="split-banner-content">
+                <div class="banner-slogan">Your Car.<br>Our <span>Care.</span></div>
+            </div>
+
+            <!-- Support Badges -->
+            <div class="banner-badges-row">
+                <div class="badge-box">
+                    <div class="badge-box-icon"><i class="fa-solid fa-headset"></i></div>
+                    <div class="badge-box-label">24/7 Support</div>
+                </div>
+                <div class="badge-box">
+                    <div class="badge-box-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="badge-box-label">Secure & Safe</div>
+                </div>
+                <div class="badge-box">
+                    <div class="badge-box-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="badge-box-label">Quick Response</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Validation & Redirect Script -->
+<script>
+    (function initSplitContactFormValidation() {
+        const form = document.getElementById('splitContactForm');
+        const nameInput = document.getElementById('fullNameInput');
+        const emailInput = document.getElementById('emailInput');
+        const phoneInput = document.getElementById('phoneInput');
+        const serviceSelect = document.getElementById('serviceSelect');
+        const messageInput = document.getElementById('messageInput');
+
+        if (!form) return;
+
+        // Real-Time Sanitization for Name (Only letters & spaces)
+        nameInput.addEventListener('input', () => {
+            nameInput.value = nameInput.value.replace(/[^a-zA-Z\s]/g, '');
+            validateName();
+        });
+
+        // Real-Time Sanitization for Phone (Only digits, max 10)
+        phoneInput.addEventListener('input', () => {
+            phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '').slice(0, 10);
+            validatePhone();
+        });
+
+        emailInput.addEventListener('input', validateEmail);
+        serviceSelect.addEventListener('change', validateService);
+        messageInput.addEventListener('input', validateMessage);
+
+        function validateName() {
+            const val = nameInput.value.trim();
+            const err = document.getElementById('nameError');
+            if (!val) {
+                showError(nameInput, err, 'Full name is required');
+                return false;
+            } else if (val.length < 3) {
+                showError(nameInput, err, 'Name must be at least 3 characters');
+                return false;
+            }
+            showSuccess(nameInput, err);
+            return true;
+        }
+
+        function validateEmail() {
+            const val = emailInput.value.trim();
+            const err = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!val) {
+                showError(emailInput, err, 'Email address is required');
+                return false;
+            } else if (!emailRegex.test(val)) {
+                showError(emailInput, err, 'Enter a valid email address');
+                return false;
+            }
+            showSuccess(emailInput, err);
+            return true;
+        }
+
+        function validatePhone() {
+            const val = phoneInput.value.trim();
+            const err = document.getElementById('phoneError');
+            if (!val) {
+                showError(phoneInput, err, 'Phone number is required');
+                return false;
+            } else if (val.length !== 10) {
+                showError(phoneInput, err, 'Enter a valid 10-digit phone number');
+                return false;
+            }
+            showSuccess(phoneInput, err);
+            return true;
+        }
+
+        function validateService() {
+            const val = serviceSelect.value;
+            const err = document.getElementById('serviceError');
+            if (!val) {
+                showError(serviceSelect, err, 'Please select a service');
+                return false;
+            }
+            showSuccess(serviceSelect, err);
+            return true;
+        }
+
+        function validateMessage() {
+            const val = messageInput.value.trim();
+            const err = document.getElementById('messageError');
+            if (!val) {
+                showError(messageInput, err, 'Message cannot be empty');
+                return false;
+            } else if (val.length < 10) {
+                showError(messageInput, err, 'Message must be at least 10 characters');
+                return false;
+            }
+            showSuccess(messageInput, err);
+            return true;
+        }
+
+        function showError(input, errElem, message) {
+            input.classList.add('is-invalid');
+            input.classList.remove('is-valid');
+            errElem.textContent = message;
+        }
+
+        function showSuccess(input, errElem) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+            errElem.textContent = '';
+        }
+
+        // Submit Handler
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const isNameValid = validateName();
+            const isEmailValid = validateEmail();
+            const isPhoneValid = validatePhone();
+            const isServiceValid = validateService();
+            const isMessageValid = validateMessage();
+
+            if (isNameValid && isEmailValid && isPhoneValid && isServiceValid && isMessageValid) {
+                // Form is valid -> Redirect to 404 page for demo
+                window.location.href = '404.html';
+            }
+        });
+    })();
+</script>
+<!-- ==========================================
+     SECTION 4: LOCATION & MAP - MODERN LAYOUT
+     ========================================== -->
+<style>
+    .location-map-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .location-map-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Editorial Content */
+    .location-text-content {
+        padding-right: 20px;
+    }
+
+    .location-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+    }
+
+    .location-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 20px;
+    }
+
+    .location-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .location-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 30px;
+    }
+
+    /* Feature Highlights List */
+    .location-highlights {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 35px;
+    }
+
+    .highlight-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-weight: 700;
+    }
+
+    .highlight-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+        flex-shrink: 0;
+    }
+
+    .directions-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 0.95rem;
+        font-weight: 800;
+        padding: 14px 32px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .directions-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Right Side Modern Dark Map Card Stage */
+    .map-card-stage {
+        position: relative;
+        height: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+        background: #0a0d14;
+    }
+
+    .map-iframe-wrapper {
+        width: 100%;
+        height: 100%;
+        filter: invert(90%) hue-rotate(180deg) contrast(1.2) grayscale(0.8);
+    }
+
+    .map-iframe-wrapper iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    /* Floating Location Card Overlay on Map */
+    .map-floating-badge {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background: rgba(10, 13, 20, 0.9);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        border-radius: 18px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        z-index: 5;
+    }
+
+    .badge-studio-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 900;
+    }
+
+    .badge-studio-info h4 {
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-weight: 800;
+        margin: 0 0 2px;
+    }
+
+    .badge-studio-info p {
+        color: #00f0ff;
+        font-size: 0.78rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    /* Floating Studio Location Pin Glow */
+    .map-center-pin {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 4;
+        pointer-events: none;
+    }
+
+    .pin-pulse-glow {
+        width: 24px;
+        height: 24px;
+        background: #00f0ff;
+        border-radius: 50%;
+        box-shadow: 0 0 25px #00f0ff, 0 0 50px #00f0ff;
+        animation: pinPulse 2s infinite;
+    }
+
+    @keyframes pinPulse {
+        0% { transform: scale(0.9); opacity: 1; }
+        50% { transform: scale(1.4); opacity: 0.6; }
+        100% { transform: scale(0.9); opacity: 1; }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .location-map-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .location-text-content {
+            padding-right: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .map-card-stage {
+            height: 380px;
+        }
+        .location-title {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<section class="location-map-section" id="location-map">
+    <div class="location-map-container">
+        
+        <!-- Left Editorial Text Content -->
+        <div class="location-text-content">
+            <span class="location-sub-tag">Studio Location</span>
+            <h2 class="location-title">Find Us <span>Easily</span></h2>
+            <p class="location-desc">
+                Our car wash & detailing center is conveniently located on Omalur Main Road near 5-Roads Junction in Salem. Drop by or get in touch with us!
+            </p>
+
+            <div class="location-highlights">
+                <div class="highlight-item">
+                    <div class="highlight-icon"><i class="fa-solid fa-car"></i></div>
+                    <span>5 mins from 5-Roads Junction</span>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon"><i class="fa-solid fa-square-parking"></i></div>
+                    <span>Ample Customer Parking Available</span>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon"><i class="fa-solid fa-road"></i></div>
+                    <span>Easy Access from Main Highway</span>
+                </div>
+            </div>
+
+            <a href="404.html" class="directions-btn">
+                <span>Get Directions</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- Right Side Map Stage -->
+        <div class="map-card-stage">
+            
+            <!-- Floating Badge Card -->
+            <div class="map-floating-badge">
+                <div class="badge-studio-logo">S</div>
+                <div class="badge-studio-info">
+                    <h4>Stackly Auto Detailing</h4>
+                    <p>Salem Studio Center</p>
+                </div>
+            </div>
+
+            <!-- Pulsing Pin Indicator -->
+            <div class="map-center-pin">
+                <div class="pin-pulse-glow"></div>
+            </div>
+
+            <!-- Embedded Google Map centered on Salem, Tamil Nadu -->
+            <div class="map-iframe-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.491689269784!2d78.1345!3d11.6643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf1d000000001%3A0x1!2sOmalur%20Main%20Rd%2C%20Salem%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 5: FAQ SECTION - ACCORDION LAYOUT
+     ========================================== -->
+<style>
+    .faq-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .faq-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Side Spotlight Image Banner & Prompt */
+    .faq-banner-card {
+        position: relative;
+        height: 520px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 40px 32px;
+    }
+
+    .faq-banner-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .faq-banner-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.65) contrast(1.2);
+    }
+
+    .faq-banner-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 20%, rgba(10, 13, 20, 0.95) 100%);
+        z-index: 2;
+    }
+
+    .faq-banner-content {
+        position: relative;
+        z-index: 3;
+    }
+
+    .faq-banner-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.2;
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+    }
+
+    .faq-contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        font-size: 0.9rem;
+        font-weight: 800;
+        padding: 12px 24px;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    }
+
+    .faq-contact-btn:hover {
+        background: #00f0ff;
+        color: #000000;
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Right Side Accordion List */
+    .faq-accordion-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .faq-header {
+        margin-bottom: 20px;
+    }
+
+    .faq-title {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: -1px;
+        margin: 0 0 10px;
+    }
+
+    .faq-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        margin: 0;
+    }
+
+    /* Accordion Item Styling */
+    .faq-accordion-item {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.2);
+        border-radius: 18px;
+        overflow: hidden;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-accordion-item.active {
+        border-color: #00f0ff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .faq-accordion-header {
+        width: 100%;
+        padding: 20px 24px;
+        background: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 800;
+        font-family: inherit;
+        text-align: left;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .faq-accordion-header:hover {
+        color: #00f0ff;
+    }
+
+    .faq-icon-toggle {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+        flex-shrink: 0;
+    }
+
+    .faq-accordion-item.active .faq-icon-toggle {
+        transform: rotate(180deg);
+        background: #00f0ff;
+        color: #000000;
+    }
+
+    .faq-accordion-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+        padding: 0 24px;
+        color: #cbd5e1;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .faq-accordion-item.active .faq-accordion-body {
+        max-height: 200px;
+        padding: 0 24px 20px 24px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .faq-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .faq-banner-card {
+            height: 360px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .faq-title {
+            font-size: 2.2rem;
+        }
+        .faq-accordion-header {
+            font-size: 0.95rem;
+            padding: 16px 18px;
+        }
+    }
+</style>
+
+<section class="faq-section" id="faq-accordion">
+    <div class="faq-container">
+        
+        <!-- Left Side Spotlight Banner -->
+        <div class="faq-banner-card">
+            <div class="faq-banner-bg">
+                <img src="./1 (12)_11zon.webp" alt="Supercar Wash Detailing FAQ">
+                <div class="faq-banner-overlay"></div>
+            </div>
+
+            <div class="faq-banner-content">
+                <h3 class="faq-banner-title">Still Have Questions?</h3>
+                <a href="404.html" class="faq-contact-btn">
+                    <span>Contact Us</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Right Side Accordion -->
+        <div class="faq-accordion-wrapper">
+            <div class="faq-header">
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                <p class="faq-desc">Find quick answers to common questions about our car wash and detailing studio services in Salem.</p>
+            </div>
+
+            <!-- FAQ Item 1 -->
+            <div class="faq-accordion-item ">
+                <button class="faq-accordion-header">
+                    <span>What are your studio opening hours?</span>
+                    <div class="faq-icon-toggle"><i class="fa-solid fa-chevron-down"></i></div>
+                </button>
+                <div class="faq-accordion-body">
+                    Our Salem studio is open Monday through Saturday from 8:00 AM to 8:00 PM, and on Sundays from 9:00 AM to 6:00 PM.
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header">
+                    <span>How do I book a detailing service?</span>
+                    <div class="faq-icon-toggle"><i class="fa-solid fa-chevron-down"></i></div>
+                </button>
+                <div class="faq-accordion-body">
+                    You can book easily through our contact form above, call our support team directly, or visit our studio on Omalur Main Road near 5-Roads Junction.
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header">
+                    <span>Do you offer pickup or doorstep service?</span>
+                    <div class="faq-icon-toggle"><i class="fa-solid fa-chevron-down"></i></div>
+                </button>
+                <div class="faq-accordion-body">
+                    Yes! We provide complimentary vehicle pickup and drop-off service across Salem city limits for all comprehensive coating and detailing packages.
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header">
+                    <span>What payment methods do you accept?</span>
+                    <div class="faq-icon-toggle"><i class="fa-solid fa-chevron-down"></i></div>
+                </button>
+                <div class="faq-accordion-body">
+                    We accept Cash, UPI payments (GPay, PhonePe, Paytm), Credit/Debit cards, and Net Banking for all services.
+                </div>
+            </div>
+
+            <!-- FAQ Item 5 -->
+            <div class="faq-accordion-item">
+                <button class="faq-accordion-header">
+                    <span>Is my vehicle safe while in your studio?</span>
+                    <div class="faq-icon-toggle"><i class="fa-solid fa-chevron-down"></i></div>
+                </button>
+                <div class="faq-accordion-body">
+                    Absolutely. Our facility is equipped with 24/7 CCTV monitoring, indoor climate-controlled bays, and trained professionals who handle every car with utmost care.
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Accordion Toggle Script -->
+<script>
+    (function initFaqAccordion() {
+        const items = document.querySelectorAll('#faq-accordion .faq-accordion-item');
+        items.forEach(item => {
+            const header = item.querySelector('.faq-accordion-header');
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                items.forEach(other => other.classList.remove('active'));
+                
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    })();
+</script>
+<!-- ==========================================
+     SECTION 6: HELP & SUPPORT - ICON + IMAGE LAYOUT
+     ========================================== -->
+<style>
+    .support-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .support-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Side Support Content */
+    .support-content-left {
+        padding-right: 20px;
+    }
+
+    .support-sub-tag {
+        color: #00f0ff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 12px;
+        display: inline-block;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+
+    .support-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 16px;
+    }
+
+    .support-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .support-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 35px;
+    }
+
+    /* 2x2 Support Cards Grid */
+    .support-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .support-card {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 20px;
+        padding: 24px 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        text-decoration: none;
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .support-card:hover {
+        transform: translateY(-5px);
+        border-color: #00f0ff;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.3);
+    }
+
+    .support-icon-box {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+        flex-shrink: 0;
+    }
+
+    .support-card-info h4 {
+        color: #ffffff;
+        font-size: 1.05rem;
+        font-weight: 800;
+        margin: 0 0 4px;
+        letter-spacing: -0.2px;
+    }
+
+    .support-card-info p {
+        color: #94a3b8;
+        font-size: 0.82rem;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* Right Side Portrait Stage with Ambient Glowing Ring */
+    .support-stage-right {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .support-ring-glow {
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 240, 255, 0.4);
+        box-shadow: 0 0 50px rgba(0, 240, 255, 0.3), inset 0 0 30px rgba(0, 240, 255, 0.2);
+        animation: ringPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes ringPulse {
+        0% { transform: scale(0.95); opacity: 0.7; }
+        100% { transform: scale(1.05); opacity: 1; }
+    }
+
+    .support-avatar-wrapper {
+        position: relative;
+        width: 380px;
+        height: 480px;
+        border-radius: 30px;
+        overflow: hidden;
+        z-index: 2;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+    }
+
+    .support-avatar-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        filter: brightness(0.85) contrast(1.15);
+    }
+
+    /* Floating Watermark Text */
+    .support-watermark-text {
+        position: absolute;
+        bottom: 30px;
+        right: -20px;
+        z-index: 3;
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.35);
+        font-style: italic;
+        line-height: 1.1;
+        text-align: right;
+        pointer-events: none;
+        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    }
+
+    .support-watermark-text span {
+        color: #00f0ff;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 1024px) {
+        .support-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .support-content-left {
+            padding-right: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .support-cards-grid {
+            grid-template-columns: 1fr;
+        }
+        .support-title {
+            font-size: 2.5rem;
+        }
+        .support-avatar-wrapper {
+            width: 100%;
+            height: 380px;
+        }
+        .support-ring-glow {
+            width: 300px;
+            height: 300px;
+        }
+        .support-watermark-text {
+            right: 10px;
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<section class="support-section" id="help-support">
+    <div class="support-container">
+        
+        <!-- Left Side Content & Support Cards -->
+        <div class="support-content-left">
+            <span class="support-sub-tag">Need Help?</span>
+            <h2 class="support-title">We're Here <span>for You</span></h2>
+            <p class="support-desc">Get in touch with our support team in Salem for any queries, assistance, or special requests regarding your vehicle.</p>
+
+            <div class="support-cards-grid">
+                
+                <!-- Card 1: Service Support -->
+                <a href="404.html" class="support-card">
+                    <div class="support-icon-box">
+                        <i class="fa-solid fa-user-gear"></i>
+                    </div>
+                    <div class="support-card-info">
+                        <h4>Service Support</h4>
+                        <p>For booking & services</p>
+                    </div>
+                </a>
+
+                <!-- Card 2: Technical Support -->
+                <a href="404.html" class="support-card">
+                    <div class="support-icon-box">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="support-card-info">
+                        <h4>Technical Support</h4>
+                        <p>For website issues</p>
+                    </div>
+                </a>
+
+                <!-- Card 3: Feedback -->
+                <a href="404.html" class="support-card">
+                    <div class="support-icon-box">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                    <div class="support-card-info">
+                        <h4>Feedback</h4>
+                        <p>Your opinion matters</p>
+                    </div>
+                </a>
+
+                <!-- Card 4: Emergency Contact -->
+                <a href="404.html" class="support-card">
+                    <div class="support-icon-box">
+                        <i class="fa-solid fa-life-ring"></i>
+                    </div>
+                    <div class="support-card-info">
+                        <h4>Emergency Contact</h4>
+                        <p>For urgent requests</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+
+        <!-- Right Side Customer Support Avatar & Glow Stage -->
+        <div class="support-stage-right">
+            <div class="support-ring-glow"></div>
+            
+            <div class="support-avatar-wrapper">
+                <img src="./girl2.webp" alt="Salem Support Representative">
+            </div>
+
+            <div class="support-watermark-text">
+                We Listen<br><span>We Care</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 7: SOCIAL MEDIA & NEWSLETTER - CREATIVE LAYOUT
+     ========================================== -->
+<style>
+    .social-newsletter-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .social-newsletter-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 0.8fr 1.2fr 0.8fr;
+        gap: 40px;
+        align-items: center;
+    }
+
+    /* Left Column: Social Media Links */
+    .social-links-col {
+        padding-right: 10px;
+    }
+
+    .social-title {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 12px;
+    }
+
+    .social-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 28px;
+    }
+
+    .social-icons-grid {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 30px;
+    }
+
+    .social-icon-btn {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: rgba(10, 13, 20, 0.85);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    }
+
+    .social-icon-btn:hover {
+        background: #00f0ff;
+        color: #000000;
+        transform: translateY(-4px);
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    }
+
+    .social-tags-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tag-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #cbd5e1;
+        font-size: 0.85rem;
+        font-weight: 700;
+    }
+
+    .tag-item i {
+        color: #00f0ff;
+        font-size: 0.75rem;
+    }
+
+    /* Center Column: Newsletter Glassmorphic Card */
+    .newsletter-card {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        border-radius: 28px;
+        padding: 40px 32px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
+        text-align: center;
+    }
+
+    .newsletter-card-title {
+        font-size: 2rem;
+        font-weight: 900;
+        color: #ffffff;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .newsletter-card-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    .newsletter-form-group {
+        position: relative;
+        margin-bottom: 16px;
+    }
+
+    .newsletter-input {
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 14px;
+        padding: 16px 20px;
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .newsletter-input:focus {
+        border-color: #00f0ff;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    .newsletter-input.is-invalid {
+        border-color: #ff4d4d !important;
+        box-shadow: 0 0 12px rgba(255, 77, 77, 0.3) !important;
+    }
+
+    .newsletter-err-msg {
+        color: #ff4d4d;
+        font-size: 0.78rem;
+        font-weight: 600;
+        display: block;
+        text-align: left;
+        min-height: 16px;
+        margin-top: 4px;
+    }
+
+    .newsletter-submit-btn {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 0.95rem;
+        font-weight: 800;
+        padding: 16px;
+        border-radius: 14px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 12px 30px rgba(0, 240, 255, 0.35);
+    }
+
+    .newsletter-submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Right Column: Mobile App Frame Display */
+    .app-frame-wrapper {
+        position: relative;
+        width: 240px;
+        height: 460px;
+        margin: 0 auto;
+        border-radius: 36px;
+        border: 4px solid rgba(0, 240, 255, 0.4);
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.25);
+        background: #0a0d14;
+    }
+
+    .app-frame-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.85) contrast(1.15);
+    }
+
+    .app-frame-overlay {
+        position: absolute;
+        bottom: 0;
+        inset-x: 0;
+        padding: 20px 16px;
+        background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 20, 0.95) 100%);
+        text-align: center;
+    }
+
+    .app-frame-text {
+        color: #ffffff;
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    .app-frame-text span {
+        color: #00f0ff;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+        .social-newsletter-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .social-links-col {
+            padding-right: 0;
+            text-align: center;
+        }
+        .social-icons-grid, .social-tags-list {
+            justify-content: center;
+            align-items: center;
+        }
+    }
+</style>
+
+<section class="social-newsletter-section" id="social-newsletter">
+    <div class="social-newsletter-container">
+        
+        <!-- Left Column: Social Links -->
+        <div class="social-links-col">
+            <h2 class="social-title">Stay Connected</h2>
+            <p class="social-desc">Follow us for the latest updates, car care tips, and exclusive offers from our Salem studio!</p>
+
+            <div class="social-icons-grid">
+                <a href="404.html" class="social-icon-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="404.html" class="social-icon-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="404.html" class="social-icon-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                
+                <a href="404.html" class="social-icon-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+
+            <div class="social-tags-list">
+                <div class="tag-item"><i class="fa-solid fa-check"></i> Latest Offers</div>
+                <div class="tag-item"><i class="fa-solid fa-check"></i> Car Care Tips</div>
+                <div class="tag-item"><i class="fa-solid fa-check"></i> Behind the Scenes</div>
+            </div>
+        </div>
+
+        <!-- Center Column: Newsletter Subscription Form -->
+        <div class="newsletter-card">
+            <h3 class="newsletter-card-title">Subscribe to Our Newsletter</h3>
+            <p class="newsletter-card-desc">Get updates on offers, new services, and car care tips directly to your inbox.</p>
+
+            <form id="newsletterForm" novalidate>
+                <div class="newsletter-form-group">
+                    <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your email address">
+                    <span class="newsletter-err-msg" id="newsletterErr"></span>
+                </div>
+
+                <button type="submit" class="newsletter-submit-btn">
+                    <span>Subscribe</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Right Column: Mobile App Frame Display -->
+        <div class="app-frame-wrapper">
+            <img src="./1 (45)_31_11zon.webp" alt="Clean Cars Happier Drives App">
+            <div class="app-frame-overlay">
+                <div class="app-frame-text">Clean Cars<br><span>Happier Drives</span></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Newsletter Validation & Redirect Script -->
+<script>
+    (function initNewsletterValidation() {
+        const form = document.getElementById('newsletterForm');
+        const emailInput = document.getElementById('newsletterEmail');
+        const errElem = document.getElementById('newsletterErr');
+
+        if (!form) return;
+
+        emailInput.addEventListener('input', validateEmail);
+
+        function validateEmail() {
+            const val = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!val) {
+                emailInput.classList.add('is-invalid');
+                errElem.textContent = 'Email address is required';
+                return false;
+            } else if (!emailRegex.test(val)) {
+                emailInput.classList.add('is-invalid');
+                errElem.textContent = 'Enter a valid email address';
+                return false;
+            } else {
+                emailInput.classList.remove('is-invalid');
+                errElem.textContent = '';
+                return true;
+            }
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (validateEmail()) {
+                window.location.href = '404.html';
+            }
+        });
+    })();
+</script>
+<!-- ==========================================
+     SECTION 9: CUSTOMER REVIEWS & CONTACT STRIP
+     ========================================== -->
+<style>
+    .reviews-contact-strip-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .reviews-contact-container {
+        max-width: 1350px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    /* Left Column: Reviews Header & Cards Row */
+    .reviews-left-col {
+        padding-right: 10px;
+    }
+
+    .reviews-header-title {
+        font-size: 2.8rem;
+        font-weight: 900;
+        color: #ffffff;
+        letter-spacing: -1px;
+        margin: 0 0 10px;
+    }
+
+    .reviews-header-desc {
+        color: #94a3b8;
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+    }
+
+    .reviews-cards-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .review-card {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 20px;
+        padding: 20px 16px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .review-card:hover {
+        transform: translateY(-6px);
+        border-color: #00f0ff;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.3);
+    }
+
+    .review-user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .review-avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid #00f0ff;
+    }
+
+    .user-meta h5 {
+        color: #ffffff;
+        font-size: 0.88rem;
+        font-weight: 800;
+        margin: 0 0 2px;
+    }
+
+    .user-meta p {
+        color: #00f0ff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .review-quote {
+        color: #cbd5e1;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        margin-bottom: 14px;
+        font-style: italic;
+    }
+
+    .review-stars {
+        color: #00f0ff;
+        font-size: 0.75rem;
+        display: flex;
+        gap: 4px;
+    }
+
+    /* Right Column: Contact Strip Card Stage */
+    .contact-strip-card {
+        position: relative;
+        height: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.2);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 36px 30px;
+    }
+
+    .strip-card-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .strip-card-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.65) contrast(1.2);
+    }
+
+    .strip-card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10, 13, 20, 0.5) 0%, rgba(10, 13, 20, 0.95) 100%);
+        z-index: 2;
+    }
+
+    .strip-card-content {
+        position: relative;
+        z-index: 3;
+    }
+
+    .strip-sub-tag {
+        color: #00f0ff;
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+        display: inline-block;
+    }
+
+    .strip-title {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        margin-bottom: 10px;
+        letter-spacing: -0.5px;
+    }
+
+    .strip-desc {
+        color: #cbd5e1;
+        font-size: 0.9rem;
+        margin-bottom: 24px;
+    }
+
+    .strip-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #00f0ff 0%, #0066ff 100%);
+        color: #000000;
+        font-size: 0.9rem;
+        font-weight: 800;
+        padding: 12px 28px;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 10px 25px rgba(0, 240, 255, 0.35);
+    }
+
+    .strip-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 240, 255, 0.6);
+    }
+
+    /* Bottom Contact Details Footer Row */
+    .strip-details-footer {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .detail-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #ffffff;
+        font-size: 0.82rem;
+        font-weight: 700;
+    }
+
+    .detail-line i {
+        color: #00f0ff;
+        font-size: 0.85rem;
+    }
+
+    .strip-watermark {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 3;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.2);
+        font-style: italic;
+        pointer-events: none;
+        text-align: right;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1100px) {
+        .reviews-contact-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .reviews-left-col {
+            padding-right: 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .reviews-cards-row {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<section class="reviews-contact-strip-section" id="reviews-contact-strip">
+    <div class="reviews-contact-container">
+        
+        <!-- Left Column: Reviews Section -->
+        <div class="reviews-left-col">
+            <h2 class="reviews-header-title">Our Customers Love Us</h2>
+            <p class="reviews-header-desc">Don't just take our word for it. Here's what luxury vehicle owners say about our Salem studio.</p>
+
+            <div class="reviews-cards-row">
+                
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-user-info">
+                            <img src="./boy1.webp" class="review-avatar" alt="Rohit S.">
+                            <div class="user-meta">
+                                <h5>Rohit S.</h5>
+                                <p>BMW Owner</p>
+                            </div>
+                        </div>
+                        <p class="review-quote">"Excellent service! My car looks brand new every time. Highly recommended!"</p>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-user-info">
+                            <img src="./girl2.webp" class="review-avatar" alt="Priya M.">
+                            <div class="user-meta">
+                                <h5>Priya M.</h5>
+                                <p>Honda Owner</p>
+                            </div>
+                        </div>
+                        <p class="review-quote">"The team is professional and super friendly. Great experience and value for money."</p>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div>
+                        <div class="review-user-info">
+                            <img src="./boy4.webp" class="review-avatar" alt="Arjun K.">
+                            <div class="user-meta">
+                                <h5>Arjun K.</h5>
+                                <p>Audi Owner</p>
+                            </div>
+                        </div>
+                        <p class="review-quote">"Fast, reliable and top-notch quality. Best car wash service in Salem!"</p>
+                    </div>
+                    <div class="review-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Right Column: Contact Strip Banner Card -->
+        <div class="contact-strip-card">
+            <div class="strip-card-bg">
+                <img src="./1 (7)_11zon.webp" alt="Salem Contact Studio">
+                <div class="strip-card-overlay"></div>
+            </div>
+
+            <div class="strip-watermark">
+                We're Just a<br>Click Away
+            </div>
+
+            <div class="strip-card-content">
+                <span class="strip-sub-tag">Have Any Questions?</span>
+                <h3 class="strip-title">Get in Touch Today</h3>
+                <p class="strip-desc">We're always happy to help with bookings and custom detailing quotes.</p>
+
+                <a href="404.html" class="strip-btn">
+                    <span>Contact Us</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Footer Contact Quick Lines -->
+            <div class="strip-details-footer">
+                <div class="detail-line">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+91 98765 43210</span>
+                </div>
+                <div class="detail-line">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>info@stacklywash.com</span>
+                </div>
+                <div class="detail-line">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>5-Roads Junction, Salem, Tamil Nadu</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- ==========================================
+     SECTION 8: INTERACTIVE CONTACT - 3D/ILLUSTRATION LAYOUT
+     ========================================== -->
+<style>
+    .contact-3d-section {
+        padding: 100px 0;
+        background-color: #000000;
+        position: relative;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow: hidden;
+    }
+
+    .contact-3d-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 30px;
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* Left Side Graphic Stage */
+    .graphic-stage-left {
+        position: relative;
+        height: 480px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 240, 255, 0.3);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 240, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at center, rgba(0, 240, 255, 0.15) 0%, rgba(10, 13, 20, 0.95) 75%);
+    }
+
+    .graphic-stage-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+    }
+
+    .graphic-stage-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.65) contrast(1.2);
+    }
+
+    .graphic-stage-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(10, 13, 20, 0.4) 0%, rgba(10, 13, 20, 0.9) 100%);
+        z-index: 2;
+    }
+
+    .graphic-watermark-text {
+        position: relative;
+        z-index: 3;
+        font-size: 3rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.35);
+        font-style: italic;
+        line-height: 1.1;
+        text-align: center;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+        pointer-events: none;
+    }
+
+    .graphic-watermark-text span {
+        color: #00f0ff;
+    }
+
+    /* Right Side Contact Hub */
+    .contact-hub-right {
+        padding-left: 10px;
+    }
+
+    .hub-title {
+        font-size: 3.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.15;
+        letter-spacing: -1px;
+        margin-bottom: 12px;
+    }
+
+    .hub-title span {
+        background: linear-gradient(90deg, #00f0ff 0%, #0066ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hub-desc {
+        color: #94a3b8;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 35px;
+    }
+
+    /* 2x2 Interactive Action Buttons Grid */
+    .hub-actions-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .hub-action-card {
+        background: rgba(10, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 240, 255, 0.25);
+        border-radius: 20px;
+        padding: 24px 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hub-action-card:hover {
+        transform: translateY(-5px);
+        border-color: #00f0ff;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.95), 0 0 25px rgba(0, 240, 255, 0.3);
+    }
+
+    .hub-icon-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: rgba(0, 240, 255, 0.1);
+        border: 1px solid rgba(0, 240, 255, 0.4);
+        color: #00f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        flex-shrink: 0;
+    }
+
+    .hub-action-label {
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: -0.2px;
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 1024px) {
+        .contact-3d-container {
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        .contact-hub-right {
+            padding-left: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .hub-actions-grid {
+            grid-template-columns: 1fr;
+        }
+        .hub-title {
+            font-size: 2.5rem;
+        }
+        .graphic-stage-left {
+            height: 320px;
+        }
+        .graphic-watermark-text {
+            font-size: 2.2rem;
+        }
+    }
+</style>
+
+<section class="contact-3d-section" id="contact-hub-3d">
+    <div class="contact-3d-container">
+        
+        <!-- Left Side Graphic Banner Stage -->
+        <div class="graphic-stage-left">
+            <div class="graphic-stage-bg">
+                <img src="./1 (29)_15_11zon.webp" alt="Supercar Detailing Salem Studio">
+                <div class="graphic-stage-overlay"></div>
+            </div>
+
+            <div class="graphic-watermark-text">
+                Here's<br><span>We Care</span>
+            </div>
+        </div>
+
+        <!-- Right Side Interactive Contact Hub -->
+        <div class="contact-hub-right">
+            <h2 class="hub-title">Let's <span>Connect!</span></h2>
+            <p class="hub-desc">Quick, easy and hassle-free. Choose how you want to reach our Salem detailing team.</p>
+
+            <div class="hub-actions-grid">
+                
+                <!-- Action 1: Call Us -->
+                <a href="404.html" class="hub-action-card">
+                    <div class="hub-icon-circle">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <span class="hub-action-label">Call Us</span>
+                </a>
+
+                <!-- Action 2: Email Us -->
+                <a href="404.html" class="hub-action-card">
+                    <div class="hub-icon-circle">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <span class="hub-action-label">Email Us</span>
+                </a>
+
+                <!-- Action 3: Chat on WhatsApp -->
+                <a href="404.html" class="hub-action-card">
+                    <div class="hub-icon-circle">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <span class="hub-action-label">Chat on WhatsApp</span>
+                </a>
+
+                <!-- Action 4: Get Directions -->
+                <a href="404.html" class="hub-action-card">
+                    <div class="hub-icon-circle">
+                        <i class="fa-solid fa-location-arrow"></i>
+                    </div>
+                    <span class="hub-action-label">Get Directions</span>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="./index.html" class="logo">
+                    <img src="./logo.webp" alt="Stackly Logo" class="custom-logo" onerror="this.style.display='none';">
+                </a>
+                <p>Setting the absolute benchmark in professional automobile detailing and eco-friendly car wash services.</p>
+                <!-- Two extra lines of description below logo -->
+                <p class="footer-extra-desc"> Trusted by elite drivers for uncompromised, swirl-free gloss protection.</p>
+                
+                <div class="social-icons" style="margin-top: 20px;">
+                    <a href="./404.html"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="./404.html"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="./404.html"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="./404.html"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./about us.html">About Us</a></li>
+                    <li><a href="./our services.html">Our Services</a></li>
+                    <li><a href="./washpackages.html">Wash Packages</a></li>
+                    <li><a href="./gallery.html">Gallery</a></li>
+                    <li><a href="./contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="./404.html">Foam Bath</a></li>
+                    <li><a href="./404.html">Interior Detailing</a></li>
+                    <li><a href="./404.html">Ceramic Coating</a></li>
+                    <li><a href="./404.html">Engine Bay Clean</a></li>
+                    <li><a href="./404.html">Underbody Wash</a></li>
+                    <li><a href="./404.html">Full Automotive</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h4>Newsletter</h4>
+                <p>Subscribe for special seasonal discounts and auto care tips.</p>
+                <!-- Form with validation and 404 redirect script -->
+                <form id="newsletterForm" onsubmit="handleNewsletterRedirect(event)">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email" required>
+                    <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+
+                <!-- Phone number, Location, and Map placed directly BELOW the newsletter subscribe button -->
+                <div class="footer-location-block">
+                    <p class="footer-phone"><i class="fa-solid fa-phone" style="color: var(--accent-cyan); margin-right: 8px;"></i> +91 9842545675</p>
+                    <p class="footer-address"><i class="fa-solid fa-location-dot" style="color: var(--accent-cyan); margin-right: 8px;"></i> 5/42  Salem, Tamil Nadu</p>
+                    <div class="footer-map-embed">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62552.47772659356!2d78.10228795!3d11.664325!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xbabf0141a61905a5%3A0x742468307e868f77!2sSalem%2C%23!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin" width="100%" height="110" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Stackly Car Wash Services. All rights reserved.</p>
+            <div class="footer-policy">
+                <a href="./404.html">Privacy Policy</a>
+                <a href="./404.html">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    function handleNewsletterRedirect(event) {
+        event.preventDefault(); 
+        const emailInput = document.getElementById('newsletterEmail');
+        
+        if (emailInput.value.trim() === '') {
+            emailInput.reportValidity(); 
+            return;
+        }
+
+        window.location.href = '404.html?email=' + encodeURIComponent(emailInput.value);
+    }
+</script>
+    <!-- JavaScript code -->
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            if (navMenu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+    </script>
+</body>
+</html>
